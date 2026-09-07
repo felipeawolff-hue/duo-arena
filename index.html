@@ -257,16 +257,15 @@ function renderDashboard() {
   if (sorted.length >= 2) {
     const mc = ["gold","silver","bronze"];
     const icons = ["👑","🥈","🥉"];
-    const h = [130, 90, 60];
+    const h = {0: 140, 1: 100, 2: 65};
     podium.innerHTML = [1,0,2].map(idx => {
       const p = sorted[idx];
       if (!p) return '<div style="flex:1"></div>';
-      const hi = [1,0,2][idx];
       return `<div class="pod pod-${idx+1}">
         <span class="pod-emoji" style="font-size:${idx===0?42:28}px">${icons[idx]}</span>
         <span class="pod-name">${esc(p.displayName||p.username)}</span>
         <span class="pod-xp">+${fmtXP(deltaXP(p))} XP</span>
-        <div class="pod-bar" style="height:${h[hi]}px"><span>${idx+1}</span></div>
+        <div class="pod-bar" style="height:${h[idx]}px"><span>${idx+1}</span></div>
       </div>`;
     }).join("");
     podium.classList.remove("hidden");
