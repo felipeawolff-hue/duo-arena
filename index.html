@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duo Arena</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a1628;--card:#111d33;--accent:#58cc02;--gold:#ffc800;--silver:#c0c0c0;--bronze:#cd7f32;--danger:#ff4b4b;--text:#e8eaf0;--dim:#8a96a8;--border:#1e2d4a;--input:#0d1f3c}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;min-height:100vh}
+a{color:var(--accent)}
+
+/* Login */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.login-card{background:var(--card);border-radius:16px;padding:36px 28px;width:100%;max-width:400px;border:1px solid var(--border)}
+.logo{text-align:center;margin-bottom:20px}
+.logo-icon{font-size:56px;display:block}
+.logo-title{font-size:28px;font-weight:800;color:var(--accent);margin:8px 0 0}
+.logo-sub{color:var(--dim);font-size:14px;margin:4px 0 0}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;color:var(--dim);font-weight:600;margin-bottom:6px}
+.field input{width:100%;background:var(--input);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:15px;outline:none}
+.btn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:14px 0;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn:disabled{opacity:.5;cursor:default}
+.btn-outline{background:transparent;border:1px solid var(--accent);color:var(--accent);border-radius:8px;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer}
+.btn-icon{background:transparent;border:1px solid var(--border);color:var(--dim);border-radius:8px;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.btn-icon.danger{color:var(--danger);opacity:.6}
+
+/* Log */
+.log{background:#000;border-radius:8px;padding:10px;margin-top:10px;max-height:140px;overflow-y:auto;font-family:monospace;font-size:11px}
+.log div{margin-bottom:2px}
+.log .ok{color:#58cc02}.log .err{color:#ff4b4b}.log .warn{color:#ffc800}.log .info{color:#8a96a8}
+
+/* Dashboard */
+.dash{max-width:680px;margin:0 auto;padding:20px 16px 40px}
+.dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.dash-header h1{font-size:22px;font-weight:800}
+.dash-header p{font-size:13px;color:var(--dim);margin:2px 0 0}
+.add-panel{background:var(--card);border-radius:12px;padding:16px;border:1px solid var(--border);margin-bottom:16px}
+.add-row{display:flex;gap:8px}
+.add-row input{flex:1;background:var(--input);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:15px;outline:none}
+.add-row button{width:100px;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:10px 0;font-size:14px;font-weight:700;cursor:pointer}
+
+/* Podium */
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin:0 0 24px}
+.podium-slot{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;max-width:160px}
+.podium-name{color:var(--text);font-size:13px;font-weight:700;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.podium-xp{color:var(--accent);font-weight:700;font-size:13px}
+.podium-bar{width:100%;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:center}
+.podium-bar span{font-size:28px;font-weight:800}
+
+/* Player cards */
+.player-list{display:flex;flex-direction:column;gap:12px}
+.player-card{background:var(--card);border-radius:12px;padding:16px 18px;border:1px solid var(--border)}
+.player-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.player-left{display:flex;align-items:center;gap:10px}
+.rank{font-size:18px;font-weight:800;min-width:32px}
+.player-name{color:var(--text);font-size:16px;font-weight:700;display:block}
+.player-user{color:var(--dim);font-size:12px}
+.stats-row{display:flex;gap:10px}
+.stat-box{flex:1;background:var(--bg);border-radius:8px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.stat-icon{font-size:20px}
+.stat-val{font-size:20px;font-weight:800}
+.stat-label{font-size:11px;color:var(--dim);font-weight:600}
+.courses-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.course-tag{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--dim)}
+.course-tag span{color:var(--accent);font-weight:700}
+.last-update{font-size:11px;color:var(--dim);margin:8px 0 0;text-align:right}
+.btns-right{display:flex;gap:4px}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{animation:spin 1s linear infinite}
+
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen" class="login-wrap">
+  <div class="login-card">
+    <div class="logo">
+      <span class="logo-icon">🦉</span>
+      <h1 class="logo-title">Duo Arena</h1>
+      <p class="logo-sub">Competição em família</p>
+    </div>
+    <div class="field">
+      <label>Username do Duolingo</label>
+      <input id="login-input" placeholder="ex: FelipeWolf2">
+    </div>
+    <button class="btn" id="login-btn" onclick="handleLogin()">Entrar na arena</button>
+    <div id="login-log" class="log hidden"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD SCREEN -->
+<div id="dash-screen" class="dash hidden">
+  <header class="dash-header">
+    <div>
+      <h1>🦉 Duo Arena</h1>
+      <p id="dash-count"></p>
+    </div>
+    <button class="btn-outline" id="add-toggle" onclick="toggleAdd()">+ Adicionar</button>
+  </header>
+  <div id="add-panel" class="add-panel hidden">
+    <div class="add-row">
+      <input id="add-input" placeholder="Username do Duolingo">
+      <button onclick="handleAdd()">Buscar</button>
+    </div>
+    <div id="add-log" class="log hidden"></div>
+  </div>
+  <div id="podium" class="podium"></div>
+  <div id="player-list" class="player-list"></div>
+</div>
+
+<script>
+const DUO_API = "https://tacianawolff.com.br/duo-arena/api/duolingo?username=";
+const STORE_KEY = "duo-arena-players";
+let players = [];
+
+// ── Storage ──
+function loadPlayers() {
+  try { players = JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch { players = []; }
+}
+function savePlayers() {
+  localStorage.setItem(STORE_KEY, JSON.stringify(players));
+}
+
+// ── Fetch Duolingo ──
+async function fetchDuo(username, logEl) {
+  log(logEl, "info", "Buscando " + username + "...");
+  try {
+    const r = await fetch(DUO_API + encodeURIComponent(username));
+    if (!r.ok) { log(logEl, "err", "HTTP " + r.status); return null; }
+    const d = await r.json();
+    if (!d.users || !d.users.length) {
+      log(logEl, "warn", "Usuário não encontrado ou perfil privado.");
+      return null;
+    }
+    const u = d.users[0];
+    log(logEl, "ok", "Encontrado: " + (u.name || u.username));
+    return {
+      username: u.username || username,
+      displayName: u.name || u.username,
+      streak: u.streak || 0,
+      totalXp: u.totalXp || 0,
+      courses: (u.courses || []).map(c => ({
+        language: c.title || c.learningLanguage || "?",
+        xp: c.xp || 0
+      })),
+      lastUpdated: Date.now()
+    };
+  } catch (e) {
+    log(logEl, "err", e.message);
+    return null;
+  }
+}
+
+function log(el, cls, msg) {
+  if (!el) return;
+  el.classList.remove("hidden");
+  const d = document.createElement("div");
+  d.className = cls;
+  const prefix = cls === "ok" ? "✅ " : cls === "err" ? "❌ " : cls === "warn" ? "⚠️ " : "";
+  d.textContent = prefix + msg;
+  el.appendChild(d);
+  el.scrollTop = el.scrollHeight;
+}
+
+// ── Login ──
+async function handleLogin() {
+  const input = document.getElementById("login-input");
+  const logEl = document.getElementById("login-log");
+  const btn = document.getElementById("login-btn");
+  const username = input.value.trim();
+  if (!username) return;
+  logEl.innerHTML = "";
+  btn.disabled = true;
+  btn.innerHTML = '<svg class="spinner" width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg> Buscando...';
+
+  const result = await fetchDuo(username, logEl);
+  if (result) {
+    const exists = players.find(p => p.username.toLowerCase() === result.username.toLowerCase());
+    if (!exists) { players.push(result); savePlayers(); }
+    showDashboard();
+  }
+  btn.disabled = false;
+  btn.textContent = "Entrar na arena";
+}
+
+// ── Add player ──
+async function handleAdd() {
+  const input = document.getElementById("add-input");
+  const logEl = document.getElementById("add-log");
+  const username = input.value.trim();
+  if (!username) return;
+  logEl.innerHTML = "";
+
+  if (players.find(p => p.username.toLowerCase() === username.toLowerCase())) {
+    log(logEl, "warn", "Já está na arena!");
+    return;
+  }
+
+  const result = await fetchDuo(username, logEl);
+  if (result) {
+    players.push(result);
+    savePlayers();
+    input.value = "";
+    document.getElementById("add-panel").classList.add("hidden");
+    document.getElementById("add-log").classList.add("hidden");
+    renderDashboard();
+  }
+}
+
+function toggleAdd() {
+  const panel = document.getElementById("add-panel");
+  panel.classList.toggle("hidden");
+  if (!panel.classList.contains("hidden")) {
+    document.getElementById("add-input").focus();
+  }
+}
+
+// ── Refresh ──
+async function refreshPlayer(username) {
+  const btn = document.querySelector(`[data-refresh="${username}"]`);
+  if (btn) btn.innerHTML = '<svg class="spinner" width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#8a96a8" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>';
+  const result = await fetchDuo(username, null);
+  if (result) {
+    players = players.map(p => p.username.toLowerCase() === username.toLowerCase() ? result : p);
+    savePlayers();
+  }
+  renderDashboard();
+}
+
+function removePlayer(username) {
+  players = players.filter(p => p.username.toLowerCase() !== username.toLowerCase());
+  savePlayers();
+  if (!players.length) { showLogin(); return; }
+  renderDashboard();
+}
+
+// ── Screens ──
+function showLogin() {
+  document.getElementById("login-screen").classList.remove("hidden");
+  document.getElementById("dash-screen").classList.add("hidden");
+  document.getElementById("login-log").innerHTML = "";
+  document.getElementById("login-log").classList.add("hidden");
+}
+
+function showDashboard() {
+  document.getElementById("login-screen").classList.add("hidden");
+  document.getElementById("dash-screen").classList.remove("hidden");
+  renderDashboard();
+}
+
+// ── Render ──
+function renderDashboard() {
+  const sorted = [...players].sort((a, b) => (b.totalXp || 0) - (a.totalXp || 0));
+  document.getElementById("dash-count").textContent = players.length + " competidor" + (players.length !== 1 ? "es" : "");
+
+  // Podium
+  const podium = document.getElementById("podium");
+  if (sorted.length >= 2) {
+    const mc = ["#ffc800", "#c0c0c0", "#cd7f32"];
+    const icons = ["👑", "🥈", "🥉"];
+    const heights = [140, 100, 70];
+    const order = [1, 0, 2]; // show 2nd, 1st, 3rd
+    podium.innerHTML = order.map(idx => {
+      const p = sorted[idx];
+      if (!p) return '<div style="flex:1"></div>';
+      const hi = [1,0,2][idx];
+      return `<div class="podium-slot">
+        <span style="font-size:${idx===0?36:24}px">${icons[idx]}</span>
+        <span class="podium-name">${esc(p.displayName||p.username)}</span>
+        <span class="podium-xp">${fmtXP(p.totalXp)} XP</span>
+        <div class="podium-bar" style="height:${heights[hi]}px;border-top:3px solid ${mc[idx]};background:linear-gradient(180deg,${mc[idx]}33,var(--card))">
+          <span style="color:${mc[idx]}">${idx+1}</span>
+        </div>
+      </div>`;
+    }).join("");
+    podium.classList.remove("hidden");
+  } else {
+    podium.innerHTML = "";
+  }
+
+  // Player list
+  const mc = ["#ffc800", "#c0c0c0", "#cd7f32"];
+  document.getElementById("player-list").innerHTML = sorted.map((p, i) => {
+    const medal = i < 3 ? mc[i] : "var(--border)";
+    const courses = (p.courses || []).map(c =>
+      `<span class="course-tag">${esc(c.language)} <span>${fmtXP(c.xp)}</span></span>`
+    ).join("");
+    const updated = p.lastUpdated ? `<p class="last-update">${new Date(p.lastUpdated).toLocaleString("pt-BR")}</p>` : "";
+    return `<div class="player-card" style="border-left:3px solid ${medal}">
+      <div class="player-header">
+        <div class="player-left">
+          <span class="rank" style="color:${medal};font-weight:${i<3?800:600}">#${i+1}</span>
+          <div>
+            <span class="player-name">${esc(p.displayName||p.username)}</span>
+            <span class="player-user">@${esc(p.username)}</span>
+          </div>
+        </div>
+        <div class="btns-right">
+          <button class="btn-icon" data-refresh="${esc(p.username)}" onclick="refreshPlayer('${esc(p.username)}')">↻</button>
+          <button class="btn-icon danger" onclick="removePlayer('${esc(p.username)}')">✕</button>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-box"><span class="stat-icon">🔥</span><span class="stat-val" style="color:var(--gold)">${p.streak??'—'}</span><span class="stat-label">Streak</span></div>
+        <div class="stat-box"><span class="stat-icon">⚡</span><span class="stat-val" style="color:var(--accent)">${fmtXP(p.totalXp)}</span><span class="stat-label">XP Total</span></div>
+        <div class="stat-box"><span class="stat-icon">🌍</span><span class="stat-val">${p.courses?.length??0}</span><span class="stat-label">Idiomas</span></div>
+      </div>
+      ${courses?'<div class="courses-row">'+courses+'</div>':''}
+      ${updated}
+    </div>`;
+  }).join("");
+}
+
+function fmtXP(xp) {
+  if (xp == null) return "—";
+  return xp >= 1000 ? (xp/1000).toFixed(1)+"k" : String(xp);
+}
+function esc(s) { const d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
+
+// ── Init ──
+document.getElementById("login-input").addEventListener("keydown", e => { if(e.key==="Enter") handleLogin(); });
+document.getElementById("add-input").addEventListener("keydown", e => { if(e.key==="Enter") handleAdd(); });
+loadPlayers();
+if (players.length) showDashboard(); else showLogin();
+</script>
+</body>
+</html>
