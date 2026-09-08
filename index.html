@@ -29,6 +29,7 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 .btn-main{width:100%;background:var(--green);color:var(--bg);border:none;border-radius:12px;padding:16px 0;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .1s}
 .btn-main:active{transform:scale(.97)}
 .btn-main:disabled{opacity:.4;cursor:default;transform:none}
+.privacy-note{font-size:11px;color:var(--dim);margin-top:14px;text-align:center;line-height:1.4}
 
 /* Log */
 .log{background:var(--bg);border-radius:10px;padding:10px 12px;margin-top:14px;max-height:120px;overflow-y:auto;font-family:'Courier New',monospace;font-size:12px;line-height:1.5}
@@ -45,10 +46,9 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 .btn-add:hover{background:var(--border)}
 
 .add-panel{background:var(--surface);border-radius:14px;padding:16px;margin-bottom:20px}
-.add-row{display:flex;gap:8px}
-.add-row input{flex:1;background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:15px;font-family:inherit;outline:none}
-.add-row input:focus{border-color:var(--green)}
-.add-row button{background:var(--green);color:var(--bg);border:none;border-radius:10px;padding:0 20px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
+.add-panel input{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:15px;font-family:inherit;outline:none;margin-bottom:8px}
+.add-panel input:focus{border-color:var(--green)}
+.add-panel button{width:100%;background:var(--green);color:var(--bg);border:none;border-radius:10px;padding:12px 0;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
 
 /* Podium */
 .podium{display:flex;align-items:flex-end;justify-content:center;gap:6px;margin:0 0 32px;padding:0 8px}
@@ -66,6 +66,7 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 /* Player cards */
 .players{display:flex;flex-direction:column;gap:10px}
 .card{background:var(--surface);border-radius:14px;padding:18px 20px}
+.card.expired{border:1px solid var(--red)}
 .card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .card-who{display:flex;align-items:center;gap:12px}
 .card-rank{font-size:20px;font-weight:900;min-width:28px}
@@ -75,6 +76,12 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 .btn-sm{background:none;border:none;color:var(--dim);font-size:16px;width:30px;height:30px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
 .btn-sm:hover{background:var(--surface2)}
 .btn-sm.rm:hover{color:var(--red)}
+
+/* Expired inline re-auth */
+.reauth{background:var(--surface2);border-radius:10px;padding:12px;margin-top:10px}
+.reauth p{font-size:12px;color:var(--red);font-weight:700;margin-bottom:8px}
+.reauth input{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;font-family:inherit;outline:none;margin-bottom:6px}
+.reauth button{width:100%;background:var(--green);color:var(--bg);border:none;border-radius:8px;padding:8px 0;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit}
 
 /* Stats */
 .stats{display:flex;gap:20px;padding:0 4px}
@@ -100,6 +107,9 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 .crs-xp{text-align:right;color:var(--dim);font-weight:700;white-space:nowrap}
 .crs-delta{text-align:right;color:var(--dim);font-weight:800;white-space:nowrap}
 .crs-up{color:var(--green)}
+.crs-sections{display:flex;flex-wrap:wrap;gap:3px;margin-top:3px}
+.crs-sec{font-size:9px;padding:1px 5px;border-radius:3px;background:var(--surface2);color:var(--dim);font-weight:700}
+.crs-sec.done{background:var(--green-dim);color:var(--text)}
 
 .meta{font-size:11px;color:var(--dim);margin-top:10px;text-align:right;font-weight:400}
 
@@ -119,9 +129,14 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
     </div>
     <div class="field">
       <label>Username do Duolingo</label>
-      <input id="login-input" placeholder="ex: FelipeWolf2">
+      <input id="login-user" placeholder="ex: FelipeWolf2" autocomplete="username">
+    </div>
+    <div class="field">
+      <label>Senha do Duolingo</label>
+      <input id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password">
     </div>
     <button class="btn-main" id="login-btn" onclick="handleLogin()">Entrar na arena</button>
+    <p class="privacy-note">A senha vai só até o proxy pra pegar seu token. Nada é salvo no browser.</p>
     <div id="login-log" class="log hidden"></div>
   </div>
 </div>
@@ -135,10 +150,9 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
     <button class="btn-add" id="add-toggle" onclick="toggleAdd()">+ Adicionar</button>
   </div>
   <div id="add-panel" class="add-panel hidden">
-    <div class="add-row">
-      <input id="add-input" placeholder="Username do Duolingo">
-      <button onclick="handleAdd()">Buscar</button>
-    </div>
+    <input id="add-user" placeholder="Username do Duolingo" autocomplete="off">
+    <input id="add-pass" type="password" placeholder="Senha do Duolingo" autocomplete="off">
+    <button onclick="handleAdd()">Adicionar</button>
     <div id="add-log" class="log hidden"></div>
   </div>
   <div id="podium" class="podium hidden"></div>
@@ -146,34 +160,18 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 </div>
 
 <script>
-const DUO_API = "https://tacianawolff.com.br/duo-arena/api/duolingo?username=";
+const API_BASE = "https://tacianawolff.com.br/duo-arena/api";
+const AUTH_URL = API_BASE + "/auth";
+const USER_URL = API_BASE + "/user?username=";
+const PUBLIC_URL = API_BASE + "/duolingo?username=";
 const STORE_KEY = "duo-arena-players";
+const SCORE_MAX = 160;
 let players = [];
 
 function loadPlayers() {
   try { players = JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch { players = []; }
 }
 function savePlayers() { localStorage.setItem(STORE_KEY, JSON.stringify(players)); }
-
-async function fetchDuo(username, logEl) {
-  log(logEl, "info", "Buscando " + username + "...");
-  try {
-    const r = await fetch(DUO_API + encodeURIComponent(username));
-    if (!r.ok) { log(logEl, "err", "HTTP " + r.status); return null; }
-    const d = await r.json();
-    if (!d.users || !d.users.length) { log(logEl, "warn", "Usuário não encontrado ou perfil privado."); return null; }
-    const u = d.users[0];
-    log(logEl, "ok", "Encontrado: " + (u.name || u.username));
-    return {
-      username: u.username || username,
-      displayName: u.name || u.username,
-      streak: u.streak || 0,
-      totalXp: u.totalXp || 0,
-      courses: (u.courses || []).map(c => ({ language: c.title || c.learningLanguage || "?", xp: c.xp || 0, from: c.fromLanguage || "?", code: c.learningLanguage || "?" })),
-      lastUpdated: Date.now()
-    };
-  } catch (e) { log(logEl, "err", e.message); return null; }
-}
 
 function log(el, cls, msg) {
   if (!el) return;
@@ -183,36 +181,115 @@ function log(el, cls, msg) {
   el.appendChild(d); el.scrollTop = el.scrollHeight;
 }
 
+// Auth: POST /auth with credentials, then GET /user to fetch full data with score.
+async function authAndFetch(username, password, logEl) {
+  log(logEl, "info", "Autenticando " + username + "...");
+  let auth;
+  try {
+    const r = await fetch(AUTH_URL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({username, password})
+    });
+    if (r.status === 429) { log(logEl, "err", "Muitas tentativas. Espere 10 minutos."); return null; }
+    auth = await r.json();
+  } catch (e) { log(logEl, "err", "Rede: " + e.message); return null; }
+
+  if (!auth.success) {
+    log(logEl, "err", auth.message || "Falha no login");
+    return null;
+  }
+  log(logEl, "ok", "Autenticado");
+  return await fetchUser(auth.username, logEl);
+}
+
+// GET /user (authenticated) → mapper to internal shape.
+async function fetchUser(username, logEl) {
+  log(logEl, "info", "Buscando dados...");
+  let d;
+  try {
+    const r = await fetch(USER_URL + encodeURIComponent(username));
+    if (r.status === 404) { log(logEl, "err", "Sem token. Faça login."); return {expired: true}; }
+    if (!r.ok) { log(logEl, "err", "HTTP " + r.status); return null; }
+    d = await r.json();
+  } catch (e) { log(logEl, "err", e.message); return null; }
+
+  if (d && d.error === "expired") {
+    log(logEl, "warn", "Sessão expirada. Re-login.");
+    return {expired: true};
+  }
+
+  log(logEl, "ok", "Dados carregados: " + (d.name || d.username));
+  return mapUser(d, username);
+}
+
+function mapUser(d, fallbackUsername) {
+  return {
+    username: d.username || fallbackUsername,
+    displayName: d.name || d.username || fallbackUsername,
+    streak: d.streak || 0,
+    totalXp: d.totalXp || 0,
+    courses: (d.courses || []).map(c => ({
+      language: c.title || c.learningLanguage || "?",
+      xp: c.xp || 0,
+      from: c.fromLanguage || "?",
+      code: c.learningLanguage || "?",
+      score: (typeof c.score === "number") ? c.score : (c.score && typeof c.score.score === "number" ? c.score.score : null),
+      sectionScores: c.score && Array.isArray(c.score.sectionScores) ? c.score.sectionScores : null,
+      level: c.score && c.score.level ? c.score.level : null
+    })),
+    lastUpdated: Date.now(),
+    expired: false
+  };
+}
+
 async function handleLogin() {
-  const input = document.getElementById("login-input");
+  const userEl = document.getElementById("login-user");
+  const passEl = document.getElementById("login-pass");
   const logEl = document.getElementById("login-log");
   const btn = document.getElementById("login-btn");
-  const username = input.value.trim();
-  if (!username) return;
+  const username = userEl.value.trim();
+  const password = passEl.value;
+  if (!username || !password) { log(logEl, "warn", "Preencha usuário e senha."); return; }
   logEl.innerHTML = ""; btn.disabled = true;
-  btn.innerHTML = '<svg class="spinner" width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4" stroke-linecap="round"/></svg> Buscando...';
-  const result = await fetchDuo(username, logEl);
-  if (result) {
-    const exists = players.find(p => p.username.toLowerCase() === result.username.toLowerCase());
-    if (!exists) { result.baselineXp = result.totalXp; result.baselineCourses = Object.fromEntries((result.courses||[]).map(c=>[c.language,c.xp])); players.push(result); savePlayers(); }
+  btn.innerHTML = '<svg class="spinner" width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4" stroke-linecap="round"/></svg> Entrando...';
+  const result = await authAndFetch(username, password, logEl);
+  if (result && !result.expired) {
+    passEl.value = "";
+    const idx = players.findIndex(p => p.username.toLowerCase() === result.username.toLowerCase());
+    if (idx === -1) {
+      result.baselineXp = result.totalXp;
+      result.baselineCourses = Object.fromEntries(result.courses.map(c=>[c.language,c.xp]));
+      players.push(result);
+    } else {
+      const old = players[idx];
+      result.baselineXp = old.baselineXp ?? result.totalXp;
+      result.baselineCourses = old.baselineCourses ?? Object.fromEntries(result.courses.map(c=>[c.language,c.xp]));
+      players[idx] = result;
+    }
+    savePlayers();
     showDashboard();
   }
   btn.disabled = false; btn.textContent = "Entrar na arena";
 }
 
 async function handleAdd() {
-  const input = document.getElementById("add-input");
+  const userEl = document.getElementById("add-user");
+  const passEl = document.getElementById("add-pass");
   const logEl = document.getElementById("add-log");
-  const username = input.value.trim();
-  if (!username) return;
+  const username = userEl.value.trim();
+  const password = passEl.value;
+  if (!username || !password) { log(logEl, "warn", "Preencha usuário e senha."); return; }
   logEl.innerHTML = "";
-  if (players.find(p => p.username.toLowerCase() === username.toLowerCase())) { log(logEl, "warn", "Já está na arena!"); return; }
-  const result = await fetchDuo(username, logEl);
-  if (result) {
+  if (players.find(p => p.username.toLowerCase() === username.toLowerCase())) {
+    log(logEl, "warn", "Já está na arena!"); return;
+  }
+  const result = await authAndFetch(username, password, logEl);
+  if (result && !result.expired) {
     result.baselineXp = result.totalXp;
-    result.baselineCourses = Object.fromEntries((result.courses||[]).map(c=>[c.language,c.xp]));
+    result.baselineCourses = Object.fromEntries(result.courses.map(c=>[c.language,c.xp]));
     players.push(result); savePlayers();
-    input.value = "";
+    userEl.value = ""; passEl.value = "";
     document.getElementById("add-panel").classList.add("hidden");
     document.getElementById("add-log").classList.add("hidden");
     renderDashboard();
@@ -221,25 +298,45 @@ async function handleAdd() {
 
 function toggleAdd() {
   const p = document.getElementById("add-panel"); p.classList.toggle("hidden");
-  if (!p.classList.contains("hidden")) document.getElementById("add-input").focus();
+  if (!p.classList.contains("hidden")) document.getElementById("add-user").focus();
 }
 
 async function refreshPlayer(username) {
   const btn = document.querySelector('[data-r="'+username+'"]');
   if (btn) btn.innerHTML = '<svg class="spinner" width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4" stroke-linecap="round"/></svg>';
-  const result = await fetchDuo(username, null);
-  if (result) {
-    players = players.map(p => {
-      if (p.username.toLowerCase() === username.toLowerCase()) {
-        result.baselineXp = p.baselineXp ?? p.totalXp;
-        result.baselineCourses = p.baselineCourses ?? Object.fromEntries((p.courses||[]).map(c=>[c.language,c.xp]));
-        return result;
-      }
-      return p;
-    });
-    savePlayers();
+  const result = await fetchUser(username, null);
+  const idx = players.findIndex(p => p.username.toLowerCase() === username.toLowerCase());
+  if (idx === -1) return;
+  if (!result) { renderDashboard(); return; }
+  if (result.expired) {
+    players[idx] = {...players[idx], expired: true};
+  } else {
+    result.baselineXp = players[idx].baselineXp ?? players[idx].totalXp;
+    result.baselineCourses = players[idx].baselineCourses ?? Object.fromEntries((players[idx].courses||[]).map(c=>[c.language,c.xp]));
+    players[idx] = result;
   }
+  savePlayers();
   renderDashboard();
+}
+
+async function reauthPlayer(username) {
+  const passEl = document.getElementById("reauth-pass-" + username);
+  if (!passEl) return;
+  const password = passEl.value;
+  if (!password) return;
+  const result = await authAndFetch(username, password, null);
+  if (result && !result.expired) {
+    const idx = players.findIndex(p => p.username.toLowerCase() === username.toLowerCase());
+    if (idx !== -1) {
+      result.baselineXp = players[idx].baselineXp ?? players[idx].totalXp;
+      result.baselineCourses = players[idx].baselineCourses ?? Object.fromEntries((players[idx].courses||[]).map(c=>[c.language,c.xp]));
+      players[idx] = result;
+      savePlayers();
+      renderDashboard();
+    }
+  } else {
+    alert("Falha ao re-autenticar. Verifique a senha.");
+  }
 }
 
 function removePlayer(u) {
@@ -258,15 +355,10 @@ function showDashboard() {
   renderDashboard();
 }
 
-// Total units per language code (from duocorner.com, path system)
-const UNITS = {ar:36,zh:63,cs:63,da:46,nl:85,eo:45,fi:29,fr:225,de:137,el:67,ht:29,haw:30,he:60,hi:27,hu:77,id:50,ga:48,it:72,ja:131,tlh:48,ko:78,la:20,nv:13,nb:165,pl:49,pt:81,ro:46,ru:67,gd:75,es:236,sw:53,sv:61,tr:49,uk:39,vi:55,cy:75,yi:67,zu:19,en:200};
-const XP_PER_UNIT = 75; // ~5-8 lições × ~12 XP
-
-function courseProgress(code, xp) {
-  const total = UNITS[code];
-  if (!total) return null;
-  const estUnit = Math.min(Math.round(xp / XP_PER_UNIT), total);
-  return { current: estUnit, total, pct: Math.round((estUnit / total) * 100) };
+function courseProgress(c) {
+  if (c.score == null) return null;
+  const cur = Math.max(0, Math.min(c.score, SCORE_MAX));
+  return {current: cur, total: SCORE_MAX, pct: Math.round((cur / SCORE_MAX) * 100), level: c.level};
 }
 
 function deltaXP(p) { return (p.totalXp || 0) - (p.baselineXp ?? p.totalXp ?? 0); }
@@ -279,7 +371,6 @@ function renderDashboard() {
 
   const podium = document.getElementById("podium");
   if (sorted.length >= 2) {
-    const mc = ["gold","silver","bronze"];
     const icons = ["👑","🥈","🥉"];
     const h = {0: 140, 1: 100, 2: 65};
     podium.innerHTML = [1,0,2].map(idx => {
@@ -305,10 +396,18 @@ function renderDashboard() {
       .map(c => {
         const base = bl[c.language] || 0;
         const delta = c.xp - base;
-        const prog = courseProgress(c.code, c.xp);
-        const barHtml = prog
-          ? `<div class="crs-bar-bg"><div class="crs-bar-fill" style="width:${prog.pct}%"></div></div><span class="crs-prog-text">${prog.current}/${prog.total}</span>`
-          : `<div class="crs-bar-bg"><div class="crs-bar-fill" style="width:0%"></div></div>`;
+        const prog = courseProgress(c);
+        let barHtml;
+        if (prog) {
+          const levelTxt = prog.level ? `${prog.level} · ${prog.current}/${prog.total}` : `${prog.current}/${prog.total}`;
+          const sections = c.sectionScores ? `<div class="crs-sections">${c.sectionScores.map(s => {
+            const done = s.score >= s.max;
+            return `<span class="crs-sec ${done?'done':''}">${esc(s.name||'§')} ${s.score||0}/${s.max||160}</span>`;
+          }).join("")}</div>` : "";
+          barHtml = `<div class="crs-bar-bg"><div class="crs-bar-fill" style="width:${prog.pct}%"></div></div><span class="crs-prog-text">${levelTxt}</span>${sections}`;
+        } else {
+          barHtml = `<div class="crs-bar-bg"><div class="crs-bar-fill" style="width:0%;opacity:.3"></div></div><span class="crs-prog-text">sem score</span>`;
+        }
         return `<tr>
           <td class="crs-lang">${esc(c.language)}<span class="crs-from">${c.from !== '?' ? ' (de '+c.from+')' : ''}</span></td>
           <td class="crs-bar-cell">${barHtml}</td>
@@ -318,7 +417,12 @@ function renderDashboard() {
       }).join("");
     const courseTable = courseRows ? `<table class="crs-table"><thead><tr><th>Idioma</th><th>Progresso</th><th>XP</th><th>Ganho</th></tr></thead><tbody>${courseRows}</tbody></table>` : "";
     const updated = p.lastUpdated ? `<p class="meta">${new Date(p.lastUpdated).toLocaleString("pt-BR")}</p>` : "";
-    return `<div class="card">
+    const expiredBlock = p.expired ? `<div class="reauth">
+      <p>⚠️ Sessão expirada</p>
+      <input id="reauth-pass-${esc(p.username)}" type="password" placeholder="Senha do Duolingo">
+      <button onclick="reauthPlayer('${esc(p.username)}')">Re-autenticar</button>
+    </div>` : "";
+    return `<div class="card ${p.expired?'expired':''}">
       <div class="card-top">
         <div class="card-who">
           <span class="card-rank" style="color:${rankColor}">${i+1}</span>
@@ -337,14 +441,15 @@ function renderDashboard() {
         <div class="stat stat-xp"><span class="stat-icon">⚡</span><span class="stat-num">+${fmtXP(deltaXP(p))}</span><span class="stat-lbl">XP ganho</span></div>
         <div class="stat"><span class="stat-icon">🌍</span><span class="stat-num">${p.courses?.length??0}</span><span class="stat-lbl">idiomas</span></div>
       </div>
+      ${expiredBlock}
       ${courseTable}
       ${updated}
     </div>`;
   }).join("");
 }
 
-document.getElementById("login-input").addEventListener("keydown", e => { if(e.key==="Enter") handleLogin(); });
-document.getElementById("add-input").addEventListener("keydown", e => { if(e.key==="Enter") handleAdd(); });
+document.getElementById("login-pass").addEventListener("keydown", e => { if(e.key==="Enter") handleLogin(); });
+document.getElementById("add-pass").addEventListener("keydown", e => { if(e.key==="Enter") handleAdd(); });
 loadPlayers();
 if (players.length) showDashboard(); else showLogin();
 </script>
