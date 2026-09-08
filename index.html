@@ -11,47 +11,53 @@
 :root{
   --bg:#1a1512;--surface:#252019;--surface2:#302a22;
   --green:#78e510;--green-dim:#3a6e0a;--gold:#f5c542;--silver:#b8b8b8;--bronze:#c47a2e;
-  --red:#e5564a;--text:#ede8e0;--dim:#9a9185;--border:#3a342c;
+  --red:#e5564a;--text:#ede8e0;--dim:#9a9185;--border:#3a342c;--blue:#1cb0f6;
 }
 body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
 
 /* Login */
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.login-card{background:var(--surface);border-radius:20px;padding:44px 32px 36px;width:100%;max-width:380px}
-.logo{text-align:center;margin-bottom:28px}
+.login-card{background:var(--surface);border-radius:20px;padding:36px 28px;width:100%;max-width:440px}
+.logo{text-align:center;margin-bottom:24px}
 .logo-icon{font-size:64px;display:block;margin-bottom:4px}
 .logo-title{font-size:32px;font-weight:900;color:var(--green);line-height:1}
 .logo-sub{color:var(--dim);font-size:15px;margin-top:6px;font-weight:400}
-.field{margin-bottom:18px}
-.field label{display:block;font-size:13px;color:var(--dim);font-weight:700;margin-bottom:8px}
-.field input{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:12px;padding:14px 16px;color:var(--text);font-size:16px;font-family:inherit;outline:none;transition:border-color .2s}
-.field input:focus{border-color:var(--green)}
-.btn-main{width:100%;background:var(--green);color:var(--bg);border:none;border-radius:12px;padding:16px 0;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .1s}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;color:var(--dim);font-weight:700;margin-bottom:6px}
+.field input,.field textarea{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:12px;padding:12px 14px;color:var(--text);font-size:15px;font-family:inherit;outline:none;transition:border-color .2s;resize:vertical}
+.field textarea{min-height:90px;font-family:'Courier New',monospace;font-size:12px;line-height:1.4;word-break:break-all}
+.field input:focus,.field textarea:focus{border-color:var(--green)}
+.btn-main{width:100%;background:var(--green);color:var(--bg);border:none;border-radius:12px;padding:14px 0;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .1s;margin-top:6px}
 .btn-main:active{transform:scale(.97)}
 .btn-main:disabled{opacity:.4;cursor:default;transform:none}
-.privacy-note{font-size:11px;color:var(--dim);margin-top:14px;text-align:center;line-height:1.4}
+.help-box{background:var(--surface2);border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--dim);line-height:1.5}
+.help-box strong{color:var(--text);display:block;margin-bottom:6px;font-size:13px}
+.help-box ol{padding-left:18px;margin-top:4px}
+.help-box li{margin-bottom:2px}
+.help-box code{background:var(--bg);padding:1px 4px;border-radius:3px;color:var(--green);font-size:11px}
 
 /* Log */
-.log{background:var(--bg);border-radius:10px;padding:10px 12px;margin-top:14px;max-height:120px;overflow-y:auto;font-family:'Courier New',monospace;font-size:12px;line-height:1.5}
+.log{background:var(--bg);border-radius:10px;padding:10px 12px;margin-top:12px;max-height:110px;overflow-y:auto;font-family:'Courier New',monospace;font-size:12px;line-height:1.5}
 .log div{margin-bottom:1px}
 .log .ok{color:var(--green)}.log .err{color:var(--red)}.log .warn{color:var(--gold)}.log .info{color:var(--dim)}
 
 /* Dashboard */
-.dash{max-width:600px;margin:0 auto;padding:24px 16px 48px}
-.dash-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px}
-.dash-title{font-size:26px;font-weight:900;color:var(--text);line-height:1.1}
+.dash{max-width:640px;margin:0 auto;padding:24px 16px 48px}
+.dash-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px}
+.dash-title{font-size:26px;font-weight:900;line-height:1.1}
 .dash-title span{color:var(--green)}
 .dash-count{font-size:13px;color:var(--dim);margin-top:4px;font-weight:400}
 .btn-add{background:var(--surface2);border:none;color:var(--green);border-radius:10px;padding:10px 18px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:background .15s}
 .btn-add:hover{background:var(--border)}
 
 .add-panel{background:var(--surface);border-radius:14px;padding:16px;margin-bottom:20px}
-.add-panel input{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:15px;font-family:inherit;outline:none;margin-bottom:8px}
-.add-panel input:focus{border-color:var(--green)}
-.add-panel button{width:100%;background:var(--green);color:var(--bg);border:none;border-radius:10px;padding:12px 0;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
+.add-panel input,.add-panel textarea{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text);font-size:14px;font-family:inherit;outline:none;margin-bottom:8px;resize:vertical}
+.add-panel textarea{min-height:70px;font-family:'Courier New',monospace;font-size:11px;line-height:1.4;word-break:break-all}
+.add-panel input:focus,.add-panel textarea:focus{border-color:var(--green)}
+.add-panel button{width:100%;background:var(--green);color:var(--bg);border:none;border-radius:10px;padding:11px 0;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
 
 /* Podium */
-.podium{display:flex;align-items:flex-end;justify-content:center;gap:6px;margin:0 0 32px;padding:0 8px}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:6px;margin:0 0 28px;padding:0 8px}
 .pod{flex:1;display:flex;flex-direction:column;align-items:center;max-width:140px}
 .pod-emoji{line-height:1}
 .pod-name{color:var(--text);font-size:14px;font-weight:800;margin:6px 0 2px;text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -63,8 +69,8 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 .pod-2 .pod-bar{background:linear-gradient(180deg,#b8b8b833,var(--surface));border-top:3px solid var(--silver)}
 .pod-3 .pod-bar{background:linear-gradient(180deg,#c47a2e33,var(--surface));border-top:3px solid var(--bronze)}
 
-/* Player cards */
-.players{display:flex;flex-direction:column;gap:10px}
+/* Cards */
+.players{display:flex;flex-direction:column;gap:12px}
 .card{background:var(--surface);border-radius:14px;padding:18px 20px}
 .card.expired{border:1px solid var(--red)}
 .card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
@@ -77,10 +83,10 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 .btn-sm:hover{background:var(--surface2)}
 .btn-sm.rm:hover{color:var(--red)}
 
-/* Expired inline re-auth */
+/* Re-auth inline */
 .reauth{background:var(--surface2);border-radius:10px;padding:12px;margin-top:10px}
 .reauth p{font-size:12px;color:var(--red);font-weight:700;margin-bottom:8px}
-.reauth input{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;font-family:inherit;outline:none;margin-bottom:6px}
+.reauth textarea{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--text);font-size:11px;font-family:'Courier New',monospace;outline:none;margin-bottom:6px;min-height:60px;line-height:1.3;word-break:break-all}
 .reauth button{width:100%;background:var(--green);color:var(--bg);border:none;border-radius:8px;padding:8px 0;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit}
 
 /* Stats */
@@ -92,24 +98,35 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 .stat-streak .stat-num{color:var(--gold)}
 .stat-xp .stat-num{color:var(--green)}
 
-/* Courses progress table */
-.crs-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}
-.crs-table thead th{text-align:left;color:var(--dim);font-size:11px;font-weight:700;padding:0 6px 6px;border-bottom:1px solid var(--border)}
-.crs-table thead th:nth-child(3),.crs-table thead th:nth-child(4){text-align:right}
-.crs-table tbody tr:hover{background:var(--surface2)}
-.crs-table td{padding:6px;vertical-align:middle}
-.crs-lang{font-weight:700;color:var(--text);white-space:nowrap}
-.crs-bar-cell{width:35%}
-.crs-bar-bg{background:var(--bg);border-radius:4px;height:8px;overflow:hidden}
-.crs-bar-fill{background:var(--green);height:100%;border-radius:4px;min-width:2px;transition:width .3s}
-.crs-prog-text{font-size:10px;color:var(--dim);font-weight:700;display:block;margin-top:2px}
-.crs-from{font-weight:400;color:var(--dim);font-size:11px}
-.crs-xp{text-align:right;color:var(--dim);font-weight:700;white-space:nowrap}
-.crs-delta{text-align:right;color:var(--dim);font-weight:800;white-space:nowrap}
-.crs-up{color:var(--green)}
-.crs-sections{display:flex;flex-wrap:wrap;gap:3px;margin-top:3px}
-.crs-sec{font-size:9px;padding:1px 5px;border-radius:3px;background:var(--surface2);color:var(--dim);font-weight:700}
-.crs-sec.done{background:var(--green-dim);color:var(--text)}
+/* Curso ativo — destaque */
+.active-course{background:var(--bg);border-radius:12px;padding:14px 16px;margin-top:14px;border:1px solid var(--border)}
+.ac-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;gap:8px}
+.ac-title{font-size:14px;font-weight:800}
+.ac-title-lbl{font-size:10px;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-right:6px}
+.ac-cefr{background:var(--blue);color:var(--bg);border-radius:5px;padding:2px 7px;font-size:11px;font-weight:800;letter-spacing:.3px}
+.ac-score-line{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);font-weight:700;margin-bottom:4px}
+.ac-score-line strong{color:var(--text);font-weight:800}
+.ac-bar{background:var(--surface2);border-radius:6px;height:10px;overflow:hidden;margin-bottom:12px}
+.ac-bar-fill{background:linear-gradient(90deg,var(--green),#4fc408);height:100%;border-radius:6px;min-width:2px;transition:width .4s}
+.ac-sections{display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:5px}
+.ac-sec{background:var(--surface2);border-radius:6px;padding:5px 4px;text-align:center;position:relative;overflow:hidden}
+.ac-sec-fill{position:absolute;left:0;top:0;bottom:0;background:var(--green-dim);opacity:.6;border-radius:6px}
+.ac-sec-txt{position:relative;font-size:10px;font-weight:800;color:var(--text)}
+.ac-sec-sub{position:relative;font-size:9px;color:var(--dim);font-weight:700;margin-top:1px}
+.ac-sec.done .ac-sec-fill{background:var(--green);opacity:.4}
+.ac-sec.done .ac-sec-txt{color:var(--text)}
+
+/* Outros cursos — lista compacta */
+.other-courses{margin-top:12px}
+.oc-header{font-size:10px;color:var(--dim);font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding:0 4px}
+.oc-list{display:flex;flex-direction:column;gap:2px}
+.oc-row{display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;font-size:13px;transition:background .15s}
+.oc-row:hover{background:var(--surface2)}
+.oc-lang{font-weight:700}
+.oc-lang small{font-weight:400;color:var(--dim);margin-left:4px;font-size:11px}
+.oc-xp{color:var(--dim);font-weight:700;font-size:12px}
+.oc-delta{color:var(--green);font-weight:800;font-size:12px;margin-left:8px}
+.oc-delta.zero{color:var(--dim)}
 
 .meta{font-size:11px;color:var(--dim);margin-top:10px;text-align:right;font-weight:400}
 
@@ -127,16 +144,24 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
       <h1 class="logo-title">Duo Arena</h1>
       <p class="logo-sub">Competição em família</p>
     </div>
+    <div class="help-box">
+      <strong>Como pegar o token:</strong>
+      <ol>
+        <li>Abra <code>duolingo.com</code> logado no browser</li>
+        <li>F12 → aba <strong>Application</strong> → <strong>Cookies</strong> → <code>duolingo.com</code></li>
+        <li>Copie o valor do cookie <code>jwt_token</code></li>
+        <li>Cole abaixo</li>
+      </ol>
+    </div>
     <div class="field">
       <label>Username do Duolingo</label>
       <input id="login-user" placeholder="ex: FelipeWolf2" autocomplete="username">
     </div>
     <div class="field">
-      <label>Senha do Duolingo</label>
-      <input id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password">
+      <label>JWT Token</label>
+      <textarea id="login-jwt" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></textarea>
     </div>
     <button class="btn-main" id="login-btn" onclick="handleLogin()">Entrar na arena</button>
-    <p class="privacy-note">A senha vai só até o proxy pra pegar seu token. Nada é salvo no browser.</p>
     <div id="login-log" class="log hidden"></div>
   </div>
 </div>
@@ -151,7 +176,7 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
   </div>
   <div id="add-panel" class="add-panel hidden">
     <input id="add-user" placeholder="Username do Duolingo" autocomplete="off">
-    <input id="add-pass" type="password" placeholder="Senha do Duolingo" autocomplete="off">
+    <textarea id="add-jwt" placeholder="JWT token do cookie jwt_token"></textarea>
     <button onclick="handleAdd()">Adicionar</button>
     <div id="add-log" class="log hidden"></div>
   </div>
@@ -161,11 +186,9 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 
 <script>
 const API_BASE = "https://tacianawolff.com.br/duo-arena/api";
-const AUTH_URL = API_BASE + "/auth";
+const TOKEN_URL = API_BASE + "/token";
 const USER_URL = API_BASE + "/user?username=";
-const PUBLIC_URL = API_BASE + "/duolingo?username=";
 const STORE_KEY = "duo-arena-players";
-const SCORE_MAX = 160;
 let players = [];
 
 function loadPlayers() {
@@ -181,49 +204,45 @@ function log(el, cls, msg) {
   el.appendChild(d); el.scrollTop = el.scrollHeight;
 }
 
-// Auth: POST /auth with credentials, then GET /user to fetch full data with score.
-async function authAndFetch(username, password, logEl) {
-  log(logEl, "info", "Autenticando " + username + "...");
-  let auth;
+async function saveToken(username, jwt, logEl) {
+  log(logEl, "info", "Validando token...");
   try {
-    const r = await fetch(AUTH_URL, {
+    const r = await fetch(TOKEN_URL, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({username, password})
+      body: JSON.stringify({username, jwt})
     });
-    if (r.status === 429) { log(logEl, "err", "Muitas tentativas. Espere 10 minutos."); return null; }
-    auth = await r.json();
+    const d = await r.json();
+    if (!d.success) { log(logEl, "err", d.error || "Falha ao validar token"); return null; }
+    log(logEl, "ok", "Token validado");
+    return d;
   } catch (e) { log(logEl, "err", "Rede: " + e.message); return null; }
-
-  if (!auth.success) {
-    log(logEl, "err", auth.message || "Falha no login");
-    return null;
-  }
-  log(logEl, "ok", "Autenticado");
-  return await fetchUser(auth.username, logEl);
 }
 
-// GET /user (authenticated) → mapper to internal shape.
 async function fetchUser(username, logEl) {
   log(logEl, "info", "Buscando dados...");
-  let d;
   try {
     const r = await fetch(USER_URL + encodeURIComponent(username));
-    if (r.status === 404) { log(logEl, "err", "Sem token. Faça login."); return {expired: true}; }
+    if (r.status === 404) { log(logEl, "err", "Sem token salvo."); return {expired: true}; }
     if (!r.ok) { log(logEl, "err", "HTTP " + r.status); return null; }
-    d = await r.json();
+    const d = await r.json();
+    if (d && d.error === "expired") { log(logEl, "warn", "Sessão expirada."); return {expired: true}; }
+    log(logEl, "ok", "Dados carregados: " + (d.name || d.username));
+    return mapUser(d, username);
   } catch (e) { log(logEl, "err", e.message); return null; }
+}
 
-  if (d && d.error === "expired") {
-    log(logEl, "warn", "Sessão expirada. Re-login.");
-    return {expired: true};
-  }
-
-  log(logEl, "ok", "Dados carregados: " + (d.name || d.username));
-  return mapUser(d, username);
+// Match currentCourse title from courses[] by learningLanguage (currentCourse.title comes empty).
+function resolveCurrentCourseTitle(d) {
+  const cc = d.currentCourse;
+  if (!cc || !cc.learningLanguage) return null;
+  const match = (d.courses || []).find(c => c.learningLanguage === cc.learningLanguage && c.fromLanguage === cc.fromLanguage);
+  return match ? (match.title || cc.learningLanguage) : cc.learningLanguage;
 }
 
 function mapUser(d, fallbackUsername) {
+  const cc = d.currentCourse || null;
+  const ccTitle = cc ? (cc.title || resolveCurrentCourseTitle(d) || cc.learningLanguage) : null;
   return {
     username: d.username || fallbackUsername,
     displayName: d.name || d.username || fallbackUsername,
@@ -233,11 +252,16 @@ function mapUser(d, fallbackUsername) {
       language: c.title || c.learningLanguage || "?",
       xp: c.xp || 0,
       from: c.fromLanguage || "?",
-      code: c.learningLanguage || "?",
-      score: (typeof c.score === "number") ? c.score : (c.score && typeof c.score.score === "number" ? c.score.score : null),
-      sectionScores: c.score && Array.isArray(c.score.sectionScores) ? c.score.sectionScores : null,
-      level: c.score && c.score.level ? c.score.level : null
+      code: c.learningLanguage || "?"
     })),
+    currentCourse: cc ? {
+      title: ccTitle,
+      learningLanguage: cc.learningLanguage,
+      fromLanguage: cc.fromLanguage,
+      xp: cc.xp || 0,
+      scoreMetadata: cc.scoreMetadata || null,
+      pathSectionsSummary: cc.pathSectionsSummary || []
+    } : null,
     lastUpdated: Date.now(),
     expired: false
   };
@@ -245,54 +269,57 @@ function mapUser(d, fallbackUsername) {
 
 async function handleLogin() {
   const userEl = document.getElementById("login-user");
-  const passEl = document.getElementById("login-pass");
+  const jwtEl = document.getElementById("login-jwt");
   const logEl = document.getElementById("login-log");
   const btn = document.getElementById("login-btn");
   const username = userEl.value.trim();
-  const password = passEl.value;
-  if (!username || !password) { log(logEl, "warn", "Preencha usuário e senha."); return; }
+  const jwt = jwtEl.value.trim();
+  if (!username || !jwt) { log(logEl, "warn", "Preencha usuário e token."); return; }
   logEl.innerHTML = ""; btn.disabled = true;
   btn.innerHTML = '<svg class="spinner" width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4" stroke-linecap="round"/></svg> Entrando...';
-  const result = await authAndFetch(username, password, logEl);
-  if (result && !result.expired) {
-    passEl.value = "";
-    const idx = players.findIndex(p => p.username.toLowerCase() === result.username.toLowerCase());
-    if (idx === -1) {
-      result.baselineXp = result.totalXp;
-      result.baselineCourses = Object.fromEntries(result.courses.map(c=>[c.language,c.xp]));
-      players.push(result);
-    } else {
-      const old = players[idx];
-      result.baselineXp = old.baselineXp ?? result.totalXp;
-      result.baselineCourses = old.baselineCourses ?? Object.fromEntries(result.courses.map(c=>[c.language,c.xp]));
-      players[idx] = result;
+  const auth = await saveToken(username, jwt, logEl);
+  if (auth) {
+    const result = await fetchUser(auth.username, logEl);
+    if (result && !result.expired) {
+      jwtEl.value = "";
+      const idx = players.findIndex(p => p.username.toLowerCase() === result.username.toLowerCase());
+      if (idx === -1) {
+        result.baselineXp = result.totalXp;
+        result.baselineCourses = Object.fromEntries(result.courses.map(c=>[c.language,c.xp]));
+        players.push(result);
+      } else {
+        result.baselineXp = players[idx].baselineXp ?? result.totalXp;
+        result.baselineCourses = players[idx].baselineCourses ?? Object.fromEntries(result.courses.map(c=>[c.language,c.xp]));
+        players[idx] = result;
+      }
+      savePlayers();
+      showDashboard();
     }
-    savePlayers();
-    showDashboard();
   }
   btn.disabled = false; btn.textContent = "Entrar na arena";
 }
 
 async function handleAdd() {
   const userEl = document.getElementById("add-user");
-  const passEl = document.getElementById("add-pass");
+  const jwtEl = document.getElementById("add-jwt");
   const logEl = document.getElementById("add-log");
   const username = userEl.value.trim();
-  const password = passEl.value;
-  if (!username || !password) { log(logEl, "warn", "Preencha usuário e senha."); return; }
+  const jwt = jwtEl.value.trim();
+  if (!username || !jwt) { log(logEl, "warn", "Preencha usuário e token."); return; }
   logEl.innerHTML = "";
-  if (players.find(p => p.username.toLowerCase() === username.toLowerCase())) {
-    log(logEl, "warn", "Já está na arena!"); return;
-  }
-  const result = await authAndFetch(username, password, logEl);
-  if (result && !result.expired) {
-    result.baselineXp = result.totalXp;
-    result.baselineCourses = Object.fromEntries(result.courses.map(c=>[c.language,c.xp]));
-    players.push(result); savePlayers();
-    userEl.value = ""; passEl.value = "";
-    document.getElementById("add-panel").classList.add("hidden");
-    document.getElementById("add-log").classList.add("hidden");
-    renderDashboard();
+  if (players.find(p => p.username.toLowerCase() === username.toLowerCase())) { log(logEl, "warn", "Já está na arena!"); return; }
+  const auth = await saveToken(username, jwt, logEl);
+  if (auth) {
+    const result = await fetchUser(auth.username, logEl);
+    if (result && !result.expired) {
+      result.baselineXp = result.totalXp;
+      result.baselineCourses = Object.fromEntries(result.courses.map(c=>[c.language,c.xp]));
+      players.push(result); savePlayers();
+      userEl.value = ""; jwtEl.value = "";
+      document.getElementById("add-panel").classList.add("hidden");
+      document.getElementById("add-log").classList.add("hidden");
+      renderDashboard();
+    }
   }
 }
 
@@ -320,11 +347,13 @@ async function refreshPlayer(username) {
 }
 
 async function reauthPlayer(username) {
-  const passEl = document.getElementById("reauth-pass-" + username);
-  if (!passEl) return;
-  const password = passEl.value;
-  if (!password) return;
-  const result = await authAndFetch(username, password, null);
+  const jwtEl = document.getElementById("reauth-jwt-" + username);
+  if (!jwtEl) return;
+  const jwt = jwtEl.value.trim();
+  if (!jwt) return;
+  const auth = await saveToken(username, jwt, null);
+  if (!auth) { alert("Falha ao validar token."); return; }
+  const result = await fetchUser(auth.username, null);
   if (result && !result.expired) {
     const idx = players.findIndex(p => p.username.toLowerCase() === username.toLowerCase());
     if (idx !== -1) {
@@ -334,8 +363,6 @@ async function reauthPlayer(username) {
       savePlayers();
       renderDashboard();
     }
-  } else {
-    alert("Falha ao re-autenticar. Verifique a senha.");
   }
 }
 
@@ -355,15 +382,78 @@ function showDashboard() {
   renderDashboard();
 }
 
-function courseProgress(c) {
-  if (c.score == null) return null;
-  const cur = Math.max(0, Math.min(c.score, SCORE_MAX));
-  return {current: cur, total: SCORE_MAX, pct: Math.round((cur / SCORE_MAX) * 100), level: c.level};
-}
-
 function deltaXP(p) { return (p.totalXp || 0) - (p.baselineXp ?? p.totalXp ?? 0); }
 function fmtXP(xp) { return xp == null ? "—" : xp >= 1000 ? (xp/1000).toFixed(1)+"k" : String(xp); }
-function esc(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+function esc(s) { const d = document.createElement("div"); d.textContent = String(s); return d.innerHTML; }
+function cefrLabel(c) {
+  if (!c) return "";
+  const lvl = c.level || "";
+  const sub = c.sublevel ? "." + c.sublevel : "";
+  return lvl + sub;
+}
+function currentCefrOfCourse(cc) {
+  // Highest CEFR of a section that isn't fully complete (or the last one if all complete).
+  const pss = (cc && cc.pathSectionsSummary) || [];
+  const inProgress = pss.find(s => (s.completedUnits||0) < (s.totalUnits||0));
+  const target = inProgress || pss[pss.length - 1];
+  return target ? cefrLabel(target.cefr) : "";
+}
+
+function renderActiveCourse(cc) {
+  if (!cc || !cc.scoreMetadata) return "";
+  const sm = cc.scoreMetadata;
+  const start = sm.pathStartingScore || 0;
+  const end = sm.pathEndingScore || 160;
+  const cur = Math.max(start, Math.min(sm.reachedScore || 0, end));
+  const pct = end > start ? Math.round(((cur - start) / (end - start)) * 100) : 0;
+  const cefr = currentCefrOfCourse(cc);
+  const cefrBadge = cefr ? `<span class="ac-cefr">${esc(cefr)}</span>` : "";
+  const sections = (cc.pathSectionsSummary || []).map(s => {
+    const tot = s.totalUnits || 0;
+    const done = s.completedUnits || 0;
+    const spct = tot > 0 ? Math.round((done / tot) * 100) : 0;
+    const isDone = tot > 0 && done >= tot;
+    const cefrTxt = cefrLabel(s.cefr) || (s.type === "daily_refresh" ? "★" : "?");
+    return `<div class="ac-sec ${isDone?'done':''}">
+      <div class="ac-sec-fill" style="width:${spct}%"></div>
+      <div class="ac-sec-txt">${esc(cefrTxt)}</div>
+      <div class="ac-sec-sub">${done}/${tot}</div>
+    </div>`;
+  }).join("");
+  return `<div class="active-course">
+    <div class="ac-head">
+      <div><span class="ac-title-lbl">Curso ativo</span><span class="ac-title">${esc(cc.title || cc.learningLanguage || "?")}</span></div>
+      ${cefrBadge}
+    </div>
+    <div class="ac-score-line"><span>Score CEFR</span><span><strong>${cur}</strong> / ${end}</span></div>
+    <div class="ac-bar"><div class="ac-bar-fill" style="width:${pct}%"></div></div>
+    ${sections ? `<div class="ac-sections">${sections}</div>` : ""}
+  </div>`;
+}
+
+function renderOtherCourses(p) {
+  const cc = p.currentCourse;
+  const bl = p.baselineCourses || {};
+  const others = (p.courses || [])
+    .filter(c => c.xp > 0)
+    .filter(c => !cc || c.code !== cc.learningLanguage || c.from !== cc.fromLanguage)
+    .sort((a,b) => b.xp - a.xp);
+  if (!others.length) return "";
+  const rows = others.map(c => {
+    const delta = c.xp - (bl[c.language] || 0);
+    return `<div class="oc-row">
+      <span class="oc-lang">${esc(c.language)}${c.from !== '?' ? `<small>de ${esc(c.from)}</small>` : ""}</span>
+      <span>
+        <span class="oc-xp">${fmtXP(c.xp)} XP</span>
+        <span class="oc-delta ${delta>0?'':'zero'}">${delta>0?'+':''}${fmtXP(delta)}</span>
+      </span>
+    </div>`;
+  }).join("");
+  return `<div class="other-courses">
+    <div class="oc-header">Outros cursos (${others.length})</div>
+    <div class="oc-list">${rows}</div>
+  </div>`;
+}
 
 function renderDashboard() {
   const sorted = [...players].sort((a, b) => deltaXP(b) - deltaXP(a));
@@ -389,37 +479,12 @@ function renderDashboard() {
   const mc = ["var(--gold)","var(--silver)","var(--bronze)"];
   document.getElementById("player-list").innerHTML = sorted.map((p, i) => {
     const rankColor = i < 3 ? mc[i] : "var(--dim)";
-    const bl = p.baselineCourses || {};
-    const courseRows = (p.courses || [])
-      .filter(c => c.xp > 0)
-      .sort((a,b) => b.xp - a.xp)
-      .map(c => {
-        const base = bl[c.language] || 0;
-        const delta = c.xp - base;
-        const prog = courseProgress(c);
-        let barHtml;
-        if (prog) {
-          const levelTxt = prog.level ? `${prog.level} · ${prog.current}/${prog.total}` : `${prog.current}/${prog.total}`;
-          const sections = c.sectionScores ? `<div class="crs-sections">${c.sectionScores.map(s => {
-            const done = s.score >= s.max;
-            return `<span class="crs-sec ${done?'done':''}">${esc(s.name||'§')} ${s.score||0}/${s.max||160}</span>`;
-          }).join("")}</div>` : "";
-          barHtml = `<div class="crs-bar-bg"><div class="crs-bar-fill" style="width:${prog.pct}%"></div></div><span class="crs-prog-text">${levelTxt}</span>${sections}`;
-        } else {
-          barHtml = `<div class="crs-bar-bg"><div class="crs-bar-fill" style="width:0%;opacity:.3"></div></div><span class="crs-prog-text">sem score</span>`;
-        }
-        return `<tr>
-          <td class="crs-lang">${esc(c.language)}<span class="crs-from">${c.from !== '?' ? ' (de '+c.from+')' : ''}</span></td>
-          <td class="crs-bar-cell">${barHtml}</td>
-          <td class="crs-xp">${fmtXP(c.xp)}</td>
-          <td class="crs-delta ${delta>0?'crs-up':''}">${delta>0?'+':''}${fmtXP(delta)}</td>
-        </tr>`;
-      }).join("");
-    const courseTable = courseRows ? `<table class="crs-table"><thead><tr><th>Idioma</th><th>Progresso</th><th>XP</th><th>Ganho</th></tr></thead><tbody>${courseRows}</tbody></table>` : "";
+    const active = renderActiveCourse(p.currentCourse);
+    const others = renderOtherCourses(p);
     const updated = p.lastUpdated ? `<p class="meta">${new Date(p.lastUpdated).toLocaleString("pt-BR")}</p>` : "";
     const expiredBlock = p.expired ? `<div class="reauth">
-      <p>⚠️ Sessão expirada</p>
-      <input id="reauth-pass-${esc(p.username)}" type="password" placeholder="Senha do Duolingo">
+      <p>⚠️ Sessão expirada — cole novo token</p>
+      <textarea id="reauth-jwt-${esc(p.username)}" placeholder="JWT token"></textarea>
       <button onclick="reauthPlayer('${esc(p.username)}')">Re-autenticar</button>
     </div>` : "";
     return `<div class="card ${p.expired?'expired':''}">
@@ -442,14 +507,14 @@ function renderDashboard() {
         <div class="stat"><span class="stat-icon">🌍</span><span class="stat-num">${p.courses?.length??0}</span><span class="stat-lbl">idiomas</span></div>
       </div>
       ${expiredBlock}
-      ${courseTable}
+      ${active}
+      ${others}
       ${updated}
     </div>`;
   }).join("");
 }
 
-document.getElementById("login-pass").addEventListener("keydown", e => { if(e.key==="Enter") handleLogin(); });
-document.getElementById("add-pass").addEventListener("keydown", e => { if(e.key==="Enter") handleAdd(); });
+document.getElementById("login-jwt").addEventListener("keydown", e => { if(e.key==="Enter" && (e.ctrlKey||e.metaKey)) handleLogin(); });
 loadPlayers();
 if (players.length) showDashboard(); else showLogin();
 </script>
