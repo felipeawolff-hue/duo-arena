@@ -85,10 +85,21 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 .stat-streak .stat-num{color:var(--gold)}
 .stat-xp .stat-num{color:var(--green)}
 
-/* Courses */
-.courses{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.lang{background:var(--surface2);border-radius:8px;padding:4px 10px;font-size:12px;color:var(--dim);font-weight:700}
-.lang b{color:var(--green);font-weight:800}
+/* Courses progress table */
+.crs-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}
+.crs-table thead th{text-align:left;color:var(--dim);font-size:11px;font-weight:700;padding:0 6px 6px;border-bottom:1px solid var(--border)}
+.crs-table thead th:nth-child(3),.crs-table thead th:nth-child(4){text-align:right}
+.crs-table tbody tr:hover{background:var(--surface2)}
+.crs-table td{padding:6px;vertical-align:middle}
+.crs-lang{font-weight:700;color:var(--text);white-space:nowrap}
+.crs-bar-cell{width:35%}
+.crs-bar-bg{background:var(--bg);border-radius:4px;height:8px;overflow:hidden}
+.crs-bar-fill{background:var(--green);height:100%;border-radius:4px;min-width:2px;transition:width .3s}
+.crs-prog-text{font-size:10px;color:var(--dim);font-weight:700;display:block;margin-top:2px}
+.crs-from{font-weight:400;color:var(--dim);font-size:11px}
+.crs-xp{text-align:right;color:var(--dim);font-weight:700;white-space:nowrap}
+.crs-delta{text-align:right;color:var(--dim);font-weight:800;white-space:nowrap}
+.crs-up{color:var(--green)}
 
 .meta{font-size:11px;color:var(--dim);margin-top:10px;text-align:right;font-weight:400}
 
@@ -158,7 +169,7 @@ async function fetchDuo(username, logEl) {
       displayName: u.name || u.username,
       streak: u.streak || 0,
       totalXp: u.totalXp || 0,
-      courses: (u.courses || []).map(c => ({ language: c.title || c.learningLanguage || "?", xp: c.xp || 0 })),
+      courses: (u.courses || []).map(c => ({ language: c.title || c.learningLanguage || "?", xp: c.xp || 0, from: c.fromLanguage || "?", code: c.learningLanguage || "?" })),
       lastUpdated: Date.now()
     };
   } catch (e) { log(logEl, "err", e.message); return null; }
@@ -183,7 +194,7 @@ async function handleLogin() {
   const result = await fetchDuo(username, logEl);
   if (result) {
     const exists = players.find(p => p.username.toLowerCase() === result.username.toLowerCase());
-    if (!exists) { result.baselineXp = result.totalXp; players.push(result); savePlayers(); }
+    if (!exists) { result.baselineXp = result.totalXp; result.baselineCourses = Object.fromEntries((result.courses||[]).map(c=>[c.language,c.xp])); players.push(result); savePlayers(); }
     showDashboard();
   }
   btn.disabled = false; btn.textContent = "Entrar na arena";
@@ -199,6 +210,7 @@ async function handleAdd() {
   const result = await fetchDuo(username, logEl);
   if (result) {
     result.baselineXp = result.totalXp;
+    result.baselineCourses = Object.fromEntries((result.courses||[]).map(c=>[c.language,c.xp]));
     players.push(result); savePlayers();
     input.value = "";
     document.getElementById("add-panel").classList.add("hidden");
@@ -220,6 +232,7 @@ async function refreshPlayer(username) {
     players = players.map(p => {
       if (p.username.toLowerCase() === username.toLowerCase()) {
         result.baselineXp = p.baselineXp ?? p.totalXp;
+        result.baselineCourses = p.baselineCourses ?? Object.fromEntries((p.courses||[]).map(c=>[c.language,c.xp]));
         return result;
       }
       return p;
@@ -243,6 +256,17 @@ function showDashboard() {
   document.getElementById("login-screen").classList.add("hidden");
   document.getElementById("dash-screen").classList.remove("hidden");
   renderDashboard();
+}
+
+// Total units per language code (from duocorner.com, path system)
+const UNITS = {ar:36,zh:63,cs:63,da:46,nl:85,eo:45,fi:29,fr:225,de:137,el:67,ht:29,haw:30,he:60,hi:27,hu:77,id:50,ga:48,it:72,ja:131,tlh:48,ko:78,la:20,nv:13,nb:165,pl:49,pt:81,ro:46,ru:67,gd:75,es:236,sw:53,sv:61,tr:49,uk:39,vi:55,cy:75,yi:67,zu:19,en:200};
+const XP_PER_UNIT = 75; // ~5-8 lições × ~12 XP
+
+function courseProgress(code, xp) {
+  const total = UNITS[code];
+  if (!total) return null;
+  const estUnit = Math.min(Math.round(xp / XP_PER_UNIT), total);
+  return { current: estUnit, total, pct: Math.round((estUnit / total) * 100) };
 }
 
 function deltaXP(p) { return (p.totalXp || 0) - (p.baselineXp ?? p.totalXp ?? 0); }
@@ -274,9 +298,25 @@ function renderDashboard() {
   const mc = ["var(--gold)","var(--silver)","var(--bronze)"];
   document.getElementById("player-list").innerHTML = sorted.map((p, i) => {
     const rankColor = i < 3 ? mc[i] : "var(--dim)";
-    const courses = (p.courses || []).map(c =>
-      `<span class="lang">${esc(c.language)} <b>${fmtXP(c.xp)}</b></span>`
-    ).join("");
+    const bl = p.baselineCourses || {};
+    const courseRows = (p.courses || [])
+      .filter(c => c.xp > 0)
+      .sort((a,b) => b.xp - a.xp)
+      .map(c => {
+        const base = bl[c.language] || 0;
+        const delta = c.xp - base;
+        const prog = courseProgress(c.code, c.xp);
+        const barHtml = prog
+          ? `<div class="crs-bar-bg"><div class="crs-bar-fill" style="width:${prog.pct}%"></div></div><span class="crs-prog-text">${prog.current}/${prog.total}</span>`
+          : `<div class="crs-bar-bg"><div class="crs-bar-fill" style="width:0%"></div></div>`;
+        return `<tr>
+          <td class="crs-lang">${esc(c.language)}<span class="crs-from">${c.from !== '?' ? ' (de '+c.from+')' : ''}</span></td>
+          <td class="crs-bar-cell">${barHtml}</td>
+          <td class="crs-xp">${fmtXP(c.xp)}</td>
+          <td class="crs-delta ${delta>0?'crs-up':''}">${delta>0?'+':''}${fmtXP(delta)}</td>
+        </tr>`;
+      }).join("");
+    const courseTable = courseRows ? `<table class="crs-table"><thead><tr><th>Idioma</th><th>Progresso</th><th>XP</th><th>Ganho</th></tr></thead><tbody>${courseRows}</tbody></table>` : "";
     const updated = p.lastUpdated ? `<p class="meta">${new Date(p.lastUpdated).toLocaleString("pt-BR")}</p>` : "";
     return `<div class="card">
       <div class="card-top">
@@ -297,7 +337,7 @@ function renderDashboard() {
         <div class="stat stat-xp"><span class="stat-icon">⚡</span><span class="stat-num">+${fmtXP(deltaXP(p))}</span><span class="stat-lbl">XP ganho</span></div>
         <div class="stat"><span class="stat-icon">🌍</span><span class="stat-num">${p.courses?.length??0}</span><span class="stat-lbl">idiomas</span></div>
       </div>
-      ${courses?'<div class="courses">'+courses+'</div>':''}
+      ${courseTable}
       ${updated}
     </div>`;
   }).join("");
