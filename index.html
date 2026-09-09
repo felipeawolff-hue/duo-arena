@@ -15,46 +15,37 @@
 }
 body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
 
-/* Login */
-.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.login-card{background:var(--surface);border-radius:20px;padding:36px 28px;width:100%;max-width:440px}
-.logo{text-align:center;margin-bottom:24px}
-.logo-icon{font-size:64px;display:block;margin-bottom:4px}
-.logo-title{font-size:32px;font-weight:900;color:var(--green);line-height:1}
-.logo-sub{color:var(--dim);font-size:15px;margin-top:6px;font-weight:400}
-.field{margin-bottom:14px}
-.field label{display:block;font-size:13px;color:var(--dim);font-weight:700;margin-bottom:6px}
-.field input,.field textarea{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:12px;padding:12px 14px;color:var(--text);font-size:15px;font-family:inherit;outline:none;transition:border-color .2s;resize:vertical}
-.field textarea{min-height:90px;font-family:'Courier New',monospace;font-size:12px;line-height:1.4;word-break:break-all}
-.field input:focus,.field textarea:focus{border-color:var(--green)}
-.btn-main{width:100%;background:var(--green);color:var(--bg);border:none;border-radius:12px;padding:14px 0;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .1s;margin-top:6px}
-.btn-main:active{transform:scale(.97)}
-.btn-main:disabled{opacity:.4;cursor:default;transform:none}
-.help-box{background:var(--surface2);border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--dim);line-height:1.5}
-.help-box strong{color:var(--text);display:block;margin-bottom:6px;font-size:13px}
-.help-box ol{padding-left:18px;margin-top:4px}
-.help-box li{margin-bottom:2px}
-.help-box code{background:var(--bg);padding:1px 4px;border-radius:3px;color:var(--green);font-size:11px}
-
 /* Log */
-.log{background:var(--bg);border-radius:10px;padding:10px 12px;margin-top:12px;max-height:110px;overflow-y:auto;font-family:'Courier New',monospace;font-size:12px;line-height:1.5}
+.log{background:var(--bg);border-radius:10px;padding:10px 12px;margin-top:10px;max-height:110px;overflow-y:auto;font-family:'Courier New',monospace;font-size:12px;line-height:1.5}
 .log div{margin-bottom:1px}
 .log .ok{color:var(--green)}.log .err{color:var(--red)}.log .warn{color:var(--gold)}.log .info{color:var(--dim)}
 
 /* Dashboard */
 .dash{max-width:640px;margin:0 auto;padding:24px 16px 48px}
-.dash-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px}
+.dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:12px}
 .dash-title{font-size:26px;font-weight:900;line-height:1.1}
 .dash-title span{color:var(--green)}
 .dash-count{font-size:13px;color:var(--dim);margin-top:4px;font-weight:400}
-.btn-add{background:var(--surface2);border:none;color:var(--green);border-radius:10px;padding:10px 18px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:background .15s}
+.btn-add{background:var(--surface2);border:none;color:var(--green);border-radius:10px;padding:10px 16px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:background .15s;white-space:nowrap}
 .btn-add:hover{background:var(--border)}
 
-.add-panel{background:var(--surface);border-radius:14px;padding:16px;margin-bottom:20px}
-.add-panel input,.add-panel textarea{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text);font-size:14px;font-family:inherit;outline:none;margin-bottom:8px;resize:vertical}
-.add-panel textarea{min-height:70px;font-family:'Courier New',monospace;font-size:11px;line-height:1.4;word-break:break-all}
-.add-panel input:focus,.add-panel textarea:focus{border-color:var(--green)}
-.add-panel button{width:100%;background:var(--green);color:var(--bg);border:none;border-radius:10px;padding:11px 0;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
+/* Add / reauth panel */
+.side-panel{background:var(--surface);border-radius:14px;padding:18px 20px;margin-bottom:20px}
+.side-panel h3{font-size:15px;font-weight:800;margin-bottom:10px}
+.side-panel .help{background:var(--surface2);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:11px;color:var(--dim);line-height:1.5}
+.side-panel .help strong{color:var(--text);display:block;margin-bottom:4px;font-size:12px}
+.side-panel .help ol{padding-left:18px}
+.side-panel .help code{background:var(--bg);padding:1px 4px;border-radius:3px;color:var(--green);font-size:10px}
+.side-panel input,.side-panel textarea{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text);font-size:14px;font-family:inherit;outline:none;margin-bottom:8px;resize:vertical}
+.side-panel textarea{min-height:70px;font-family:'Courier New',monospace;font-size:11px;line-height:1.4;word-break:break-all}
+.side-panel input:focus,.side-panel textarea:focus{border-color:var(--green)}
+.side-panel button{width:100%;background:var(--green);color:var(--bg);border:none;border-radius:10px;padding:11px 0;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
+
+/* Empty state */
+.empty{text-align:center;padding:60px 20px;color:var(--dim)}
+.empty .big{font-size:56px;margin-bottom:16px}
+.empty h2{font-size:20px;color:var(--text);margin-bottom:8px}
+.empty p{font-size:14px;line-height:1.5}
 
 /* Podium */
 .podium{display:flex;align-items:flex-end;justify-content:center;gap:6px;margin:0 0 28px;padding:0 8px}
@@ -83,11 +74,16 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 .btn-sm:hover{background:var(--surface2)}
 .btn-sm.rm:hover{color:var(--red)}
 
-/* Re-auth inline */
-.reauth{background:var(--surface2);border-radius:10px;padding:12px;margin-top:10px}
-.reauth p{font-size:12px;color:var(--red);font-weight:700;margin-bottom:8px}
-.reauth textarea{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--text);font-size:11px;font-family:'Courier New',monospace;outline:none;margin-bottom:6px;min-height:60px;line-height:1.3;word-break:break-all}
-.reauth button{width:100%;background:var(--green);color:var(--bg);border:none;border-radius:8px;padding:8px 0;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit}
+/* Inline confirm (delete / reauth) */
+.inline-panel{background:var(--surface2);border-radius:10px;padding:12px;margin-top:10px}
+.inline-panel p{font-size:12px;font-weight:700;margin-bottom:8px}
+.inline-panel p.warn{color:var(--red)}
+.inline-panel textarea{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--text);font-size:11px;font-family:'Courier New',monospace;outline:none;margin-bottom:6px;min-height:60px;line-height:1.3;word-break:break-all}
+.inline-panel .row{display:flex;gap:6px}
+.inline-panel button{flex:1;border:none;border-radius:8px;padding:8px 0;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit}
+.inline-panel .ok-btn{background:var(--green);color:var(--bg)}
+.inline-panel .rm-btn{background:var(--red);color:#fff}
+.inline-panel .cancel-btn{background:var(--surface);color:var(--dim)}
 
 /* Stats */
 .stats{display:flex;gap:20px;padding:0 4px}
@@ -98,37 +94,26 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 .stat-streak .stat-num{color:var(--gold)}
 .stat-xp .stat-num{color:var(--green)}
 
-/* Curso ativo — destaque */
-.active-course{background:var(--bg);border-radius:12px;padding:14px 16px;margin-top:14px;border:1px solid var(--border)}
-.ac-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;gap:8px}
-.ac-title{font-size:14px;font-weight:800}
-.ac-title-lbl{font-size:10px;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-right:6px}
-.ac-cefr{background:var(--blue);color:var(--bg);border-radius:5px;padding:2px 7px;font-size:11px;font-weight:800;letter-spacing:.3px}
-.ac-score-line{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);font-weight:700;margin-bottom:4px}
-.ac-score-line strong{color:var(--text);font-weight:800}
-.ac-bar{background:var(--surface2);border-radius:6px;height:10px;overflow:hidden;margin-bottom:12px}
-.ac-bar-fill{background:linear-gradient(90deg,var(--green),#4fc408);height:100%;border-radius:6px;min-width:2px;transition:width .4s}
-.ac-sections{display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:5px}
-.ac-sec{background:var(--surface2);border-radius:6px;padding:5px 4px;text-align:center;position:relative;overflow:hidden}
-.ac-sec-fill{position:absolute;left:0;top:0;bottom:0;background:var(--green-dim);opacity:.6;border-radius:6px}
-.ac-sec-txt{position:relative;font-size:10px;font-weight:800;color:var(--text)}
-.ac-sec-sub{position:relative;font-size:9px;color:var(--dim);font-weight:700;margin-top:1px}
-.ac-sec.done .ac-sec-fill{background:var(--green);opacity:.4}
-.ac-sec.done .ac-sec-txt{color:var(--text)}
+/* Courses table */
+.crs-block{margin-top:14px}
+.crs-head{font-size:10px;color:var(--dim);font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding:0 4px}
+.crs-list{display:flex;flex-direction:column;gap:6px}
+.crs-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:7px 10px;border-radius:8px;background:var(--bg);font-size:13px}
+.crs-row.active{background:linear-gradient(90deg,rgba(120,229,16,.08),var(--bg))}
+.crs-name{font-weight:700;display:flex;align-items:center;gap:6px;min-width:0}
+.crs-name .star{color:var(--green);font-size:12px}
+.crs-name .lang{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.crs-name small{font-weight:400;color:var(--dim);margin-left:4px;font-size:11px}
+.crs-cefr{background:var(--blue);color:var(--bg);border-radius:4px;padding:1px 6px;font-size:10px;font-weight:800;margin-left:6px}
+.crs-progress{display:flex;align-items:center;gap:8px;min-width:170px;justify-content:flex-end}
+.crs-bar{background:var(--surface2);border-radius:4px;height:6px;width:80px;overflow:hidden}
+.crs-bar-fill{background:var(--green);height:100%;border-radius:4px;transition:width .3s}
+.crs-score{color:var(--text);font-weight:800;font-size:11px;min-width:44px;text-align:right;font-variant-numeric:tabular-nums}
+.crs-xp{color:var(--dim);font-weight:700;font-size:12px;font-variant-numeric:tabular-nums}
+.crs-delta{color:var(--green);font-weight:800;font-size:11px;font-variant-numeric:tabular-nums;min-width:38px;text-align:right}
+.crs-delta.zero{color:var(--dim)}
 
-/* Outros cursos — lista compacta */
-.other-courses{margin-top:12px}
-.oc-header{font-size:10px;color:var(--dim);font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding:0 4px}
-.oc-list{display:flex;flex-direction:column;gap:2px}
-.oc-row{display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;font-size:13px;transition:background .15s}
-.oc-row:hover{background:var(--surface2)}
-.oc-lang{font-weight:700}
-.oc-lang small{font-weight:400;color:var(--dim);margin-left:4px;font-size:11px}
-.oc-xp{color:var(--dim);font-weight:700;font-size:12px}
-.oc-delta{color:var(--green);font-weight:800;font-size:12px;margin-left:8px}
-.oc-delta.zero{color:var(--dim)}
-
-.meta{font-size:11px;color:var(--dim);margin-top:10px;text-align:right;font-weight:400}
+.meta{font-size:11px;color:var(--dim);margin-top:12px;text-align:right;font-weight:400}
 
 @keyframes spin{to{transform:rotate(360deg)}}
 .spinner{animation:spin .8s linear infinite}
@@ -137,64 +122,49 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',system-ui,sans-
 </head>
 <body>
 
-<div id="login-screen" class="login-wrap">
-  <div class="login-card">
-    <div class="logo">
-      <span class="logo-icon">🦉</span>
-      <h1 class="logo-title">Duo Arena</h1>
-      <p class="logo-sub">Competição em família</p>
-    </div>
-    <div class="help-box">
-      <strong>Como pegar o token:</strong>
-      <ol>
-        <li>Abra <code>duolingo.com</code> logado no browser</li>
-        <li>F12 → aba <strong>Application</strong> → <strong>Cookies</strong> → <code>duolingo.com</code></li>
-        <li>Copie o valor do cookie <code>jwt_token</code></li>
-        <li>Cole abaixo</li>
-      </ol>
-    </div>
-    <div class="field">
-      <label>Username do Duolingo</label>
-      <input id="login-user" placeholder="ex: FelipeWolf2" autocomplete="username">
-    </div>
-    <div class="field">
-      <label>JWT Token</label>
-      <textarea id="login-jwt" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></textarea>
-    </div>
-    <button class="btn-main" id="login-btn" onclick="handleLogin()">Entrar na arena</button>
-    <div id="login-log" class="log hidden"></div>
-  </div>
-</div>
-
-<div id="dash-screen" class="dash hidden">
+<div class="dash">
   <div class="dash-top">
     <div>
       <h1 class="dash-title">🦉 Duo <span>Arena</span></h1>
-      <p id="dash-count" class="dash-count"></p>
+      <p id="dash-count" class="dash-count">carregando...</p>
     </div>
-    <button class="btn-add" id="add-toggle" onclick="toggleAdd()">+ Adicionar</button>
+    <button class="btn-add" id="add-toggle" onclick="togglePanel()">+ Adicionar / Renovar</button>
   </div>
-  <div id="add-panel" class="add-panel hidden">
-    <input id="add-user" placeholder="Username do Duolingo" autocomplete="off">
-    <textarea id="add-jwt" placeholder="JWT token do cookie jwt_token"></textarea>
-    <button onclick="handleAdd()">Adicionar</button>
-    <div id="add-log" class="log hidden"></div>
+
+  <div id="panel" class="side-panel hidden">
+    <h3 id="panel-title">Adicionar competidor</h3>
+    <div class="help">
+      <strong>Como pegar o token:</strong>
+      <ol>
+        <li>Abra <code>duolingo.com</code> logado</li>
+        <li>F12 → <strong>Application</strong> → <strong>Cookies</strong> → <code>duolingo.com</code></li>
+        <li>Copie o valor de <code>jwt_token</code> e cole abaixo</li>
+      </ol>
+    </div>
+    <input id="panel-user" placeholder="Username do Duolingo" autocomplete="off">
+    <textarea id="panel-jwt" placeholder="JWT token"></textarea>
+    <button id="panel-btn" onclick="submitPanel()">Adicionar</button>
+    <div id="panel-log" class="log hidden"></div>
   </div>
+
+  <div id="empty" class="empty hidden">
+    <div class="big">🦉</div>
+    <h2>Arena vazia</h2>
+    <p>Clique em <strong>+ Adicionar / Renovar</strong> pra cadastrar o primeiro competidor.</p>
+  </div>
+
   <div id="podium" class="podium hidden"></div>
   <div id="player-list" class="players"></div>
 </div>
 
 <script>
 const API_BASE = "https://tacianawolff.com.br/duo-arena/api";
+const ARENA_URL = API_BASE + "/arena";
 const TOKEN_URL = API_BASE + "/token";
-const USER_URL = API_BASE + "/user?username=";
-const STORE_KEY = "duo-arena-players";
+const REFRESH_URL = API_BASE + "/refresh?username=";
+const DELETE_URL = API_BASE + "/player";
+const CACHE_KEY = "duo-arena-cache";
 let players = [];
-
-function loadPlayers() {
-  try { players = JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch { players = []; }
-}
-function savePlayers() { localStorage.setItem(STORE_KEY, JSON.stringify(players)); }
 
 function log(el, cls, msg) {
   if (!el) return;
@@ -204,262 +174,209 @@ function log(el, cls, msg) {
   el.appendChild(d); el.scrollTop = el.scrollHeight;
 }
 
-async function saveToken(username, jwt, logEl) {
+function esc(s) { const d = document.createElement("div"); d.textContent = String(s == null ? "" : s); return d.innerHTML; }
+function fmtXP(xp) { return xp == null ? "—" : xp >= 1000 ? (xp/1000).toFixed(1)+"k" : String(xp); }
+function deltaXP(p) { return (p.totalXp || 0) - (p.baselineXp ?? p.totalXp ?? 0); }
+
+async function loadArena() {
+  // Warm from cache first for instant paint.
+  try {
+    const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || "null");
+    if (cached && Array.isArray(cached.players)) { players = cached.players; render(); }
+  } catch {}
+  try {
+    const r = await fetch(ARENA_URL);
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const d = await r.json();
+    players = d.players || [];
+    localStorage.setItem(CACHE_KEY, JSON.stringify({players}));
+    render();
+  } catch (e) {
+    document.getElementById("dash-count").textContent = "erro ao carregar arena";
+  }
+}
+
+function togglePanel() {
+  const p = document.getElementById("panel");
+  p.classList.toggle("hidden");
+  if (!p.classList.contains("hidden")) {
+    document.getElementById("panel-title").textContent = "Adicionar / renovar competidor";
+    document.getElementById("panel-user").focus();
+    document.getElementById("panel-log").innerHTML = "";
+    document.getElementById("panel-log").classList.add("hidden");
+  }
+}
+
+async function submitPanel() {
+  const userEl = document.getElementById("panel-user");
+  const jwtEl = document.getElementById("panel-jwt");
+  const btn = document.getElementById("panel-btn");
+  const logEl = document.getElementById("panel-log");
+  const username = userEl.value.trim();
+  const jwt = jwtEl.value.trim();
+  if (!username || !jwt) { log(logEl, "warn", "Preencha usuário e token."); return; }
+  btn.disabled = true;
+  logEl.innerHTML = "";
   log(logEl, "info", "Validando token...");
   try {
-    const r = await fetch(TOKEN_URL, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({username, jwt})
-    });
+    const r = await fetch(TOKEN_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({username, jwt})});
     const d = await r.json();
-    if (!d.success) { log(logEl, "err", d.error || "Falha ao validar token"); return null; }
-    log(logEl, "ok", "Token validado");
-    return d;
-  } catch (e) { log(logEl, "err", "Rede: " + e.message); return null; }
-}
-
-async function fetchUser(username, logEl) {
-  log(logEl, "info", "Buscando dados...");
-  try {
-    const r = await fetch(USER_URL + encodeURIComponent(username));
-    if (r.status === 404) { log(logEl, "err", "Sem token salvo."); return {expired: true}; }
-    if (!r.ok) { log(logEl, "err", "HTTP " + r.status); return null; }
-    const d = await r.json();
-    if (d && d.error === "expired") { log(logEl, "warn", "Sessão expirada."); return {expired: true}; }
-    log(logEl, "ok", "Dados carregados: " + (d.name || d.username));
-    return mapUser(d, username);
-  } catch (e) { log(logEl, "err", e.message); return null; }
-}
-
-// Match currentCourse title from courses[] by learningLanguage (currentCourse.title comes empty).
-function resolveCurrentCourseTitle(d) {
-  const cc = d.currentCourse;
-  if (!cc || !cc.learningLanguage) return null;
-  const match = (d.courses || []).find(c => c.learningLanguage === cc.learningLanguage && c.fromLanguage === cc.fromLanguage);
-  return match ? (match.title || cc.learningLanguage) : cc.learningLanguage;
-}
-
-function mapUser(d, fallbackUsername) {
-  const cc = d.currentCourse || null;
-  const ccTitle = cc ? (cc.title || resolveCurrentCourseTitle(d) || cc.learningLanguage) : null;
-  return {
-    username: d.username || fallbackUsername,
-    displayName: d.name || d.username || fallbackUsername,
-    streak: d.streak || 0,
-    totalXp: d.totalXp || 0,
-    courses: (d.courses || []).map(c => ({
-      language: c.title || c.learningLanguage || "?",
-      xp: c.xp || 0,
-      from: c.fromLanguage || "?",
-      code: c.learningLanguage || "?"
-    })),
-    currentCourse: cc ? {
-      title: ccTitle,
-      learningLanguage: cc.learningLanguage,
-      fromLanguage: cc.fromLanguage,
-      xp: cc.xp || 0,
-      scoreMetadata: cc.scoreMetadata || null,
-      pathSectionsSummary: cc.pathSectionsSummary || []
-    } : null,
-    lastUpdated: Date.now(),
-    expired: false
-  };
-}
-
-async function handleLogin() {
-  const userEl = document.getElementById("login-user");
-  const jwtEl = document.getElementById("login-jwt");
-  const logEl = document.getElementById("login-log");
-  const btn = document.getElementById("login-btn");
-  const username = userEl.value.trim();
-  const jwt = jwtEl.value.trim();
-  if (!username || !jwt) { log(logEl, "warn", "Preencha usuário e token."); return; }
-  logEl.innerHTML = ""; btn.disabled = true;
-  btn.innerHTML = '<svg class="spinner" width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4" stroke-linecap="round"/></svg> Entrando...';
-  const auth = await saveToken(username, jwt, logEl);
-  if (auth) {
-    const result = await fetchUser(auth.username, logEl);
-    if (result && !result.expired) {
-      jwtEl.value = "";
-      const idx = players.findIndex(p => p.username.toLowerCase() === result.username.toLowerCase());
-      if (idx === -1) {
-        result.baselineXp = result.totalXp;
-        result.baselineCourses = Object.fromEntries(result.courses.map(c=>[c.language,c.xp]));
-        players.push(result);
-      } else {
-        result.baselineXp = players[idx].baselineXp ?? result.totalXp;
-        result.baselineCourses = players[idx].baselineCourses ?? Object.fromEntries(result.courses.map(c=>[c.language,c.xp]));
-        players[idx] = result;
-      }
-      savePlayers();
-      showDashboard();
-    }
+    if (!d.success) { log(logEl, "err", d.error || "Token inválido"); btn.disabled = false; return; }
+    log(logEl, "ok", d.isNew ? "Token salvo. Cadastrando..." : "Token renovado.");
+    const rr = await fetch(REFRESH_URL + encodeURIComponent(d.username), {method:"POST"});
+    if (!rr.ok) { log(logEl, "err", "Falha ao buscar dados (HTTP " + rr.status + ")"); btn.disabled = false; return; }
+    const rd = await rr.json();
+    if (rd.error === "expired") { log(logEl, "err", "Token não passou na 2ª verificação."); btn.disabled = false; return; }
+    log(logEl, "ok", "Dados carregados.");
+    jwtEl.value = "";
+    userEl.value = "";
+    document.getElementById("panel").classList.add("hidden");
+    await loadArena();
+  } catch (e) {
+    log(logEl, "err", "Rede: " + e.message);
   }
-  btn.disabled = false; btn.textContent = "Entrar na arena";
-}
-
-async function handleAdd() {
-  const userEl = document.getElementById("add-user");
-  const jwtEl = document.getElementById("add-jwt");
-  const logEl = document.getElementById("add-log");
-  const username = userEl.value.trim();
-  const jwt = jwtEl.value.trim();
-  if (!username || !jwt) { log(logEl, "warn", "Preencha usuário e token."); return; }
-  logEl.innerHTML = "";
-  if (players.find(p => p.username.toLowerCase() === username.toLowerCase())) { log(logEl, "warn", "Já está na arena!"); return; }
-  const auth = await saveToken(username, jwt, logEl);
-  if (auth) {
-    const result = await fetchUser(auth.username, logEl);
-    if (result && !result.expired) {
-      result.baselineXp = result.totalXp;
-      result.baselineCourses = Object.fromEntries(result.courses.map(c=>[c.language,c.xp]));
-      players.push(result); savePlayers();
-      userEl.value = ""; jwtEl.value = "";
-      document.getElementById("add-panel").classList.add("hidden");
-      document.getElementById("add-log").classList.add("hidden");
-      renderDashboard();
-    }
-  }
-}
-
-function toggleAdd() {
-  const p = document.getElementById("add-panel"); p.classList.toggle("hidden");
-  if (!p.classList.contains("hidden")) document.getElementById("add-user").focus();
+  btn.disabled = false;
 }
 
 async function refreshPlayer(username) {
   const btn = document.querySelector('[data-r="'+username+'"]');
+  const orig = btn ? btn.innerHTML : "↻";
   if (btn) btn.innerHTML = '<svg class="spinner" width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4" stroke-linecap="round"/></svg>';
-  const result = await fetchUser(username, null);
+  try {
+    const r = await fetch(REFRESH_URL + encodeURIComponent(username), {method:"POST"});
+    if (r.status === 429) { alert("Muitas atualizações. Espere alguns minutos."); if (btn) btn.innerHTML = orig; return; }
+    const d = await r.json();
+    if (d.error === "expired") {
+      const idx = players.findIndex(p => p.username.toLowerCase() === username.toLowerCase());
+      if (idx !== -1) players[idx] = {...players[idx], expired: true};
+      render();
+      return;
+    }
+    if (d.player) {
+      const idx = players.findIndex(p => p.username.toLowerCase() === username.toLowerCase());
+      if (idx !== -1) players[idx] = d.player; else players.push(d.player);
+      localStorage.setItem(CACHE_KEY, JSON.stringify({players}));
+      render();
+    }
+  } catch (e) {
+    if (btn) btn.innerHTML = orig;
+    alert("Falha ao atualizar: " + e.message);
+  }
+}
+
+function askReauth(username) {
+  const el = document.getElementById("reauth-jwt-" + username);
+  if (el) { el.focus(); return; }
+  // Fallback: se o card não estiver marcado como expired, insere painel via botão.
+  refreshPlayer(username);
+}
+
+async function submitReauth(username) {
+  const el = document.getElementById("reauth-jwt-" + username);
+  if (!el) return;
+  const jwt = el.value.trim();
+  if (!jwt) return;
+  try {
+    const r = await fetch(TOKEN_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({username, jwt})});
+    const d = await r.json();
+    if (!d.success) { alert(d.error || "Token inválido"); return; }
+    // Server keeps baseline/data intact. Do a refresh to pull latest state.
+    await refreshPlayer(username);
+  } catch (e) { alert("Rede: " + e.message); }
+}
+
+function askDelete(username) {
   const idx = players.findIndex(p => p.username.toLowerCase() === username.toLowerCase());
   if (idx === -1) return;
-  if (!result) { renderDashboard(); return; }
-  if (result.expired) {
-    players[idx] = {...players[idx], expired: true};
-  } else {
-    result.baselineXp = players[idx].baselineXp ?? players[idx].totalXp;
-    result.baselineCourses = players[idx].baselineCourses ?? Object.fromEntries((players[idx].courses||[]).map(c=>[c.language,c.xp]));
-    players[idx] = result;
-  }
-  savePlayers();
-  renderDashboard();
+  players[idx]._confirmDelete = !players[idx]._confirmDelete;
+  render();
 }
 
-async function reauthPlayer(username) {
-  const jwtEl = document.getElementById("reauth-jwt-" + username);
-  if (!jwtEl) return;
-  const jwt = jwtEl.value.trim();
-  if (!jwt) return;
-  const auth = await saveToken(username, jwt, null);
-  if (!auth) { alert("Falha ao validar token."); return; }
-  const result = await fetchUser(auth.username, null);
-  if (result && !result.expired) {
-    const idx = players.findIndex(p => p.username.toLowerCase() === username.toLowerCase());
-    if (idx !== -1) {
-      result.baselineXp = players[idx].baselineXp ?? players[idx].totalXp;
-      result.baselineCourses = players[idx].baselineCourses ?? Object.fromEntries((players[idx].courses||[]).map(c=>[c.language,c.xp]));
-      players[idx] = result;
-      savePlayers();
-      renderDashboard();
-    }
-  }
+async function submitDelete(username) {
+  const el = document.getElementById("del-jwt-" + username);
+  if (!el) return;
+  const jwt = el.value.trim();
+  if (!jwt) { alert("Cole o JWT pra confirmar."); return; }
+  try {
+    const r = await fetch(DELETE_URL, {method:"DELETE", headers:{"Content-Type":"application/json"}, body: JSON.stringify({username, jwt})});
+    const d = await r.json();
+    if (r.status === 403) { alert("JWT não confere. Delete negado."); return; }
+    if (!d.success) { alert("Falha ao remover."); return; }
+    players = players.filter(p => p.username.toLowerCase() !== username.toLowerCase());
+    localStorage.setItem(CACHE_KEY, JSON.stringify({players}));
+    render();
+  } catch (e) { alert("Rede: " + e.message); }
 }
 
-function removePlayer(u) {
-  players = players.filter(p => p.username.toLowerCase() !== u.toLowerCase());
-  savePlayers();
-  if (!players.length) showLogin(); else renderDashboard();
+function cancelDelete(username) {
+  const idx = players.findIndex(p => p.username.toLowerCase() === username.toLowerCase());
+  if (idx === -1) return;
+  players[idx]._confirmDelete = false;
+  render();
 }
 
-function showLogin() {
-  document.getElementById("login-screen").classList.remove("hidden");
-  document.getElementById("dash-screen").classList.add("hidden");
-}
-function showDashboard() {
-  document.getElementById("login-screen").classList.add("hidden");
-  document.getElementById("dash-screen").classList.remove("hidden");
-  renderDashboard();
-}
+// --- Render ---
 
-function deltaXP(p) { return (p.totalXp || 0) - (p.baselineXp ?? p.totalXp ?? 0); }
-function fmtXP(xp) { return xp == null ? "—" : xp >= 1000 ? (xp/1000).toFixed(1)+"k" : String(xp); }
-function esc(s) { const d = document.createElement("div"); d.textContent = String(s); return d.innerHTML; }
-function cefrLabel(c) {
-  if (!c) return "";
-  const lvl = c.level || "";
-  const sub = c.sublevel ? "." + c.sublevel : "";
-  return lvl + sub;
-}
-function currentCefrOfCourse(cc) {
-  // Highest CEFR of a section that isn't fully complete (or the last one if all complete).
-  const pss = (cc && cc.pathSectionsSummary) || [];
-  const inProgress = pss.find(s => (s.completedUnits||0) < (s.totalUnits||0));
-  const target = inProgress || pss[pss.length - 1];
-  return target ? cefrLabel(target.cefr) : "";
-}
-
-function renderActiveCourse(cc) {
-  if (!cc || !cc.scoreMetadata) return "";
-  const sm = cc.scoreMetadata;
-  const start = sm.pathStartingScore || 0;
-  const end = sm.pathEndingScore || 160;
-  const cur = Math.max(start, Math.min(sm.reachedScore || 0, end));
-  const pct = end > start ? Math.round(((cur - start) / (end - start)) * 100) : 0;
-  const cefr = currentCefrOfCourse(cc);
-  const cefrBadge = cefr ? `<span class="ac-cefr">${esc(cefr)}</span>` : "";
-  const sections = (cc.pathSectionsSummary || []).map(s => {
-    const tot = s.totalUnits || 0;
-    const done = s.completedUnits || 0;
-    const spct = tot > 0 ? Math.round((done / tot) * 100) : 0;
-    const isDone = tot > 0 && done >= tot;
-    const cefrTxt = cefrLabel(s.cefr) || (s.type === "daily_refresh" ? "★" : "?");
-    return `<div class="ac-sec ${isDone?'done':''}">
-      <div class="ac-sec-fill" style="width:${spct}%"></div>
-      <div class="ac-sec-txt">${esc(cefrTxt)}</div>
-      <div class="ac-sec-sub">${done}/${tot}</div>
-    </div>`;
-  }).join("");
-  return `<div class="active-course">
-    <div class="ac-head">
-      <div><span class="ac-title-lbl">Curso ativo</span><span class="ac-title">${esc(cc.title || cc.learningLanguage || "?")}</span></div>
-      ${cefrBadge}
-    </div>
-    <div class="ac-score-line"><span>Score CEFR</span><span><strong>${cur}</strong> / ${end}</span></div>
-    <div class="ac-bar"><div class="ac-bar-fill" style="width:${pct}%"></div></div>
-    ${sections ? `<div class="ac-sections">${sections}</div>` : ""}
-  </div>`;
-}
-
-function renderOtherCourses(p) {
-  const cc = p.currentCourse;
+function renderCourses(p) {
+  const cc = p.currentCourse; // key "code|from"
   const bl = p.baselineCourses || {};
-  const others = (p.courses || [])
-    .filter(c => c.xp > 0)
-    .filter(c => !cc || c.code !== cc.learningLanguage || c.from !== cc.fromLanguage)
-    .sort((a,b) => b.xp - a.xp);
-  if (!others.length) return "";
-  const rows = others.map(c => {
-    const delta = c.xp - (bl[c.language] || 0);
-    return `<div class="oc-row">
-      <span class="oc-lang">${esc(c.language)}${c.from !== '?' ? `<small>de ${esc(c.from)}</small>` : ""}</span>
-      <span>
-        <span class="oc-xp">${fmtXP(c.xp)} XP</span>
-        <span class="oc-delta ${delta>0?'':'zero'}">${delta>0?'+':''}${fmtXP(delta)}</span>
-      </span>
-    </div>`;
-  }).join("");
-  return `<div class="other-courses">
-    <div class="oc-header">Outros cursos (${others.length})</div>
-    <div class="oc-list">${rows}</div>
+  const rows = (p.courses || [])
+    .filter(c => (c.xp || 0) > 0)
+    .sort((a,b) => {
+      // Curso ativo primeiro, depois com score, depois por XP.
+      const aActive = `${a.code}|${a.from}` === cc ? 1 : 0;
+      const bActive = `${b.code}|${b.from}` === cc ? 1 : 0;
+      if (aActive !== bActive) return bActive - aActive;
+      const aHas = "score" in a ? 1 : 0;
+      const bHas = "score" in b ? 1 : 0;
+      if (aHas !== bHas) return bHas - aHas;
+      return (b.xp || 0) - (a.xp || 0);
+    })
+    .map(c => {
+      const isActive = `${c.code}|${c.from}` === cc;
+      const delta = (c.xp || 0) - (bl[c.language] || 0);
+      let progressHtml;
+      if (c.score != null && c.scoreMax) {
+        const pct = c.scoreMax > 0 ? Math.round((c.score / c.scoreMax) * 100) : 0;
+        progressHtml = `<div class="crs-bar"><div class="crs-bar-fill" style="width:${pct}%"></div></div>
+          <span class="crs-score">${c.score}/${c.scoreMax}</span>`;
+      } else {
+        progressHtml = `<span class="crs-xp">${fmtXP(c.xp)} XP</span>`;
+      }
+      const cefr = c.cefrLevel ? `<span class="crs-cefr">${esc(c.cefrLevel)}</span>` : "";
+      return `<div class="crs-row ${isActive?'active':''}">
+        <div class="crs-name">
+          ${isActive ? '<span class="star">★</span>' : ''}
+          <span class="lang">${esc(c.language)}${c.from && c.from !== '?' ? `<small>de ${esc(c.from)}</small>` : ""}</span>
+          ${cefr}
+        </div>
+        <div class="crs-progress">
+          ${progressHtml}
+          <span class="crs-delta ${delta>0?'':'zero'}">${delta>0?'+':''}${fmtXP(delta)}</span>
+        </div>
+      </div>`;
+    }).join("");
+  if (!rows) return "";
+  return `<div class="crs-block">
+    <div class="crs-head">Cursos (${(p.courses||[]).filter(c=>(c.xp||0)>0).length})</div>
+    <div class="crs-list">${rows}</div>
   </div>`;
 }
 
-function renderDashboard() {
-  const sorted = [...players].sort((a, b) => deltaXP(b) - deltaXP(a));
+function render() {
   document.getElementById("dash-count").textContent = players.length + " competidor" + (players.length !== 1 ? "es" : "");
-
+  const empty = document.getElementById("empty");
   const podium = document.getElementById("podium");
+  if (!players.length) {
+    empty.classList.remove("hidden");
+    podium.classList.add("hidden");
+    document.getElementById("player-list").innerHTML = "";
+    return;
+  }
+  empty.classList.add("hidden");
+
+  const sorted = [...players].sort((a, b) => deltaXP(b) - deltaXP(a));
+
   if (sorted.length >= 2) {
     const icons = ["👑","🥈","🥉"];
     const h = {0: 140, 1: 100, 2: 65};
@@ -479,14 +396,21 @@ function renderDashboard() {
   const mc = ["var(--gold)","var(--silver)","var(--bronze)"];
   document.getElementById("player-list").innerHTML = sorted.map((p, i) => {
     const rankColor = i < 3 ? mc[i] : "var(--dim)";
-    const active = renderActiveCourse(p.currentCourse);
-    const others = renderOtherCourses(p);
-    const updated = p.lastUpdated ? `<p class="meta">${new Date(p.lastUpdated).toLocaleString("pt-BR")}</p>` : "";
-    const expiredBlock = p.expired ? `<div class="reauth">
-      <p>⚠️ Sessão expirada — cole novo token</p>
+    const updated = p.lastUpdated ? `<p class="meta">Atualizado: ${new Date(p.lastUpdated*1000).toLocaleString("pt-BR")}</p>` : "";
+    const expiredBlock = p.expired ? `<div class="inline-panel">
+      <p class="warn">⚠️ Sessão expirada — cole novo token</p>
       <textarea id="reauth-jwt-${esc(p.username)}" placeholder="JWT token"></textarea>
-      <button onclick="reauthPlayer('${esc(p.username)}')">Re-autenticar</button>
+      <button class="ok-btn" onclick="submitReauth('${esc(p.username)}')">Re-autenticar</button>
     </div>` : "";
+    const deleteBlock = p._confirmDelete ? `<div class="inline-panel">
+      <p class="warn">Confirme com o JWT do próprio ${esc(p.username)}</p>
+      <textarea id="del-jwt-${esc(p.username)}" placeholder="JWT do usuário pra confirmar"></textarea>
+      <div class="row">
+        <button class="cancel-btn" onclick="cancelDelete('${esc(p.username)}')">Cancelar</button>
+        <button class="rm-btn" onclick="submitDelete('${esc(p.username)}')">Remover</button>
+      </div>
+    </div>` : "";
+    const courses = renderCourses(p);
     return `<div class="card ${p.expired?'expired':''}">
       <div class="card-top">
         <div class="card-who">
@@ -498,25 +422,23 @@ function renderDashboard() {
         </div>
         <div class="card-actions">
           <button class="btn-sm" data-r="${esc(p.username)}" onclick="refreshPlayer('${esc(p.username)}')">↻</button>
-          <button class="btn-sm rm" onclick="removePlayer('${esc(p.username)}')">✕</button>
+          <button class="btn-sm rm" onclick="askDelete('${esc(p.username)}')">✕</button>
         </div>
       </div>
       <div class="stats">
         <div class="stat stat-streak"><span class="stat-icon">🔥</span><span class="stat-num">${p.streak??'—'}</span><span class="stat-lbl">streak</span></div>
         <div class="stat stat-xp"><span class="stat-icon">⚡</span><span class="stat-num">+${fmtXP(deltaXP(p))}</span><span class="stat-lbl">XP ganho</span></div>
-        <div class="stat"><span class="stat-icon">🌍</span><span class="stat-num">${p.courses?.length??0}</span><span class="stat-lbl">idiomas</span></div>
+        <div class="stat"><span class="stat-icon">🌍</span><span class="stat-num">${(p.courses||[]).filter(c=>(c.xp||0)>0).length}</span><span class="stat-lbl">idiomas</span></div>
       </div>
       ${expiredBlock}
-      ${active}
-      ${others}
+      ${deleteBlock}
+      ${courses}
       ${updated}
     </div>`;
   }).join("");
 }
 
-document.getElementById("login-jwt").addEventListener("keydown", e => { if(e.key==="Enter" && (e.ctrlKey||e.metaKey)) handleLogin(); });
-loadPlayers();
-if (players.length) showDashboard(); else showLogin();
+loadArena();
 </script>
 </body>
 </html>
